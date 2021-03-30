@@ -7,13 +7,14 @@ class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    Function removeCookie = context.read<CentralState>().removeCookie;
+    Function removeLocalStorage =
+        context.read<CentralState>().removeLocalStorage;
 
     return ElevatedButton(
       child: const Text('SIGN OUT'),
       onPressed: () async {
         await Auth.signOut();
-        removeCookie();
+        removeLocalStorage("cookie");
       },
     );
   }

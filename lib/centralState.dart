@@ -1,47 +1,71 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import "./controllers/Req.dart";
+import '../controllers/Global.dart' as globals;
 
 class CentralState with ChangeNotifier {
-  String? _cookie;
-  String? _error;
-  bool _loading = true;
+  Map<String, dynamic> config = {"loading": false};
+
 //what we need to do here
-  String? get error => _error;
-  String? get cookie => _cookie;
-  bool get loading => _loading;
+  Map get data => config;
+  String? get error => config["error"];
+  String? get cookie => config["cookie"];
+  bool get loading => config["loading"];
 //we need to make an http request
 //save the the cookie
 
   CentralState() {
-    this.readCookie();
+    this.readLocalStorage("cookie");
+    this.readLocalStorage("gps");
+    this.readLocalStorage("city");
   }
 
-  void warnUser(String value) {
-    _error = value;
+  void load(String taskName, String path,
+      {Map<String, dynamic> body = const {},
+      String method = "GET",
+      Function? callback}) async {
+    config["loading-$taskName"] = true;
+    notifyListeners();
+    try {
+      var data = await fetch(path, body, method);
+      config["loading-$taskName"] = false;
+      config[taskName] = data;
+      notifyListeners();
+      if (callback != null) {
+        callback();
+      }
+    } catch (error) {
+      if (globals.showDialog != null) {
+        globals.showDialog?.call("error", error);
+      }
+    }
+  }
+
+  void update(String field, value) {
+    config[field] = value;
     notifyListeners();
   }
   //run readTodoList();
 
-  void removeCookie() async {
+  void removeLocalStorage(String field) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    await preferences.remove('cookie');
-    _cookie = null;
+    await preferences.remove(field);
+    config[field] = null;
     notifyListeners();
-    print("removed cookie");
+    print("removed $field");
   }
 
-  void saveCookie(val) async {
+  void readLocalStorage(String field) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('cookie', val);
-    _cookie = val;
-    print("saving cookie");
+    config[field] = prefs.getString(field);
     notifyListeners();
   }
 
-  void readCookie() async {
+  void saveLocalStorage(String field, value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    _cookie = prefs.getString('cookie');
-    _loading = false;
+    prefs.setString(field, value);
+    config[field] = value;
+    print("saving $field");
     notifyListeners();
   }
 

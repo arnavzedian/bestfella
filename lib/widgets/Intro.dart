@@ -16,17 +16,17 @@ class Intro extends StatefulWidget {
 
 class IntroState extends State<Intro> {
   Widget _buildBody(BuildContext context) {
-    Function saveCookie = context.watch<CentralState>().saveCookie;
-    Function warnUser = context.watch<CentralState>().warnUser;
+    Function saveLocalStorage = context.watch<CentralState>().saveLocalStorage;
+    Function update = context.watch<CentralState>().update;
 
     return ElevatedButton(
       child: const Text('SIGN IN'),
       onPressed: () async {
         try {
           String? cookie = await Auth.signIn();
-          if (cookie != null) saveCookie(cookie);
+          if (cookie != null) saveLocalStorage("cookie", cookie);
         } catch (enError) {
-          warnUser(enError);
+          update("error", enError);
         }
       },
     );
