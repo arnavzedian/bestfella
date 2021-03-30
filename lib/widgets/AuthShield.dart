@@ -18,7 +18,7 @@ class AuthShield extends StatelessWidget {
     if (loading == true) return Loading();
     if (cookie == null) return Intro();
 
-    return this.child;
+    return Padding(padding: EdgeInsets.all(20), child: this.child);
   }
 }
 

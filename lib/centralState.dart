@@ -20,6 +20,11 @@ class CentralState with ChangeNotifier {
     this.readLocalStorage("city");
   }
 
+  void clearData(String field) {
+    config[field] = null;
+    notifyListeners();
+  }
+
   void load(String taskName, String path,
       {Map<String, dynamic> body = const {},
       String method = "GET",

@@ -3,9 +3,16 @@ import 'package:flutter/material.dart';
 import 'widgets/AuthShield.dart';
 import "./CentralState.dart";
 import 'package:provider/provider.dart';
-import './widgets/Home.dart';
-import './widgets/AuthShield.dart';
+// import './widgets/Home.dart';
+import './views/Home.dart';
+import './views/Intro.dart';
+import './views/MakeDonation.dart';
+import './views/SaveCityName.dart';
+import './views/SaveLocation.dart';
+import './views/SavePhoneNumber.dart';
+import './views/User.dart';
 
+import './widgets/AuthShield.dart';
 import './controllers/Global.dart' as globals;
 
 void main() {
@@ -49,6 +56,13 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           routes: {
             '/': (context) => AuthShield(child: Home()),
+            '/intro': (context) => AuthShield(child: Intro()),
+            '/make-donation': (context) => AuthShield(child: MakeDonation()),
+            '/save-city-name': (context) => AuthShield(child: SaveCityName()),
+            '/save-location': (context) => AuthShield(child: SaveLocation()),
+            '/save-phone-number': (context) =>
+                AuthShield(child: SavePhoneNumber()),
+            '/user': (context) => AuthShield(child: User()),
           },
         ));
   }
