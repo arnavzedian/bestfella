@@ -11,13 +11,26 @@ class CityButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Container(
-            decoration:
-                BoxDecoration(border: Border.all(color: Colors.blueAccent)),
-            padding: EdgeInsets.all(5),
-            child: Text("city:darbhanga")));
+    return GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, '/save-city-name');
+        },
+        child: new Container(
+          // width: 100.0,
+          padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
+          // height: 30.0,
+          decoration: new BoxDecoration(
+            color: Colors.grey[50],
+            border: new Border.all(color: Colors.black26, width: 2.0),
+            borderRadius: new BorderRadius.circular(10.0),
+          ),
+          child: new Center(
+            child: new Text(
+              'City: Darbhanga',
+              style: new TextStyle(fontSize: 15.0, color: Colors.black26),
+            ),
+          ),
+        ));
   }
 }
 

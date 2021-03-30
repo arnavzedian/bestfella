@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import '../widgets/TakeTextInput.dart';
+import "../widgets/SaveButton.dart";
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -9,29 +10,14 @@ import '../widgets/TakeTextInput.dart';
 //   }
 // }
 
-class SaveButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        color: Colors.grey[900],
-        child: Text(
-          'Save',
-          style: TextStyle(
-              color: Colors.white, fontSize: 40.0, fontWeight: FontWeight.bold),
-        ));
-  }
-}
-
 class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.all(30),
-        child: SingleChildScrollView(
-            child: Column(children: [
-          TakeTextInput("Your Address"),
-          SaveButton(),
-        ])));
+    return SingleChildScrollView(
+        child: Column(children: [
+      TakeTextInput("Your Address"),
+      SaveButton(),
+    ]));
   }
 }
 
@@ -49,6 +35,9 @@ class SaveLocation extends StatelessWidget {
               style: TextStyle(color: Colors.black87),
             ),
             backgroundColor: Colors.grey[200]),
-        body: MainBody());
+        body: SafeArea(
+            child: Container(
+                padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
+                child: MainBody())));
   }
 }

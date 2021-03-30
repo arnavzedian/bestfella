@@ -11,7 +11,7 @@ class RenderCards extends StatelessWidget {
   Widget build(BuildContext context) {
     final Map config = context.watch<CentralState>().config;
 
-    final List list = config["donation-list"];
+    final List list = [];
 
     return Column(
         children: list.map((_) {

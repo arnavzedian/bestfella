@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
-import 'Intro.dart';
-import 'Loading.dart';
+import '../views/Intro.dart';
 
 class AuthShield extends StatelessWidget {
   final Widget child;
@@ -11,14 +10,10 @@ class AuthShield extends StatelessWidget {
   Widget build(BuildContext context) {
     print("rebuilding...");
     String? cookie = context.watch<CentralState>().cookie;
-    String? error = context.watch<CentralState>().error;
-    bool loading = context.watch<CentralState>().loading;
 
-    if (error != null) return Text(error);
-    if (loading == true) return Loading();
     if (cookie == null) return Intro();
 
-    return Padding(padding: EdgeInsets.all(20), child: this.child);
+    return this.child;
   }
 }
 

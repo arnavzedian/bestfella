@@ -18,16 +18,47 @@ const Widget DonationHeader = Text(
       color: Colors.black87, fontSize: 40.0, fontWeight: FontWeight.bold),
 );
 
-class MainBody extends StatelessWidget {
+class DonationInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(
-            children: [Profile(), DonationHeader, RenderCards("profile")]));
+    return Row(children: [
+      ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: Container(height: 200, width: 200, color: Colors.grey[200])),
+      Column(
+        children: [Text("product name"), Text("product details")],
+      ),
+    ]);
   }
 }
 
-class User extends StatelessWidget {
+class RequestPhoneNumber extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: Container(
+            padding: EdgeInsets.all(10),
+            color: Colors.grey[200],
+            child: Text("request phone number")));
+  }
+}
+
+class MainBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.all(30),
+        child: SingleChildScrollView(
+            child: Column(children: [
+          DonationInfo(),
+          Text("render gps"),
+          RequestPhoneNumber()
+        ])));
+  }
+}
+
+class DonationDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,13 +68,13 @@ class User extends StatelessWidget {
             iconTheme: IconThemeData(color: Colors.black87),
             shadowColor: Colors.grey[50],
             title: Text(
-              'Profile',
+              'Details',
               style: TextStyle(color: Colors.black87),
             ),
             backgroundColor: Colors.grey[200]),
         body: SafeArea(
             child: Container(
-                padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
+                padding: EdgeInsets.all(25),
                 height: MediaQuery.of(context).size.height,
                 child: Stack(children: [
                   MainBody(),

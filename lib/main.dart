@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 // import './widgets/Home.dart';
 import './views/Home.dart';
 import './views/Intro.dart';
+import './views/DonationDetails.dart';
 import './views/MakeDonation.dart';
 import './views/SaveCityName.dart';
 import './views/SaveLocation.dart';
@@ -56,8 +57,9 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           routes: {
             '/': (context) => AuthShield(child: Home()),
-            '/intro': (context) => AuthShield(child: Intro()),
             '/make-donation': (context) => AuthShield(child: MakeDonation()),
+            '/donation-details': (context) =>
+                AuthShield(child: DonationDetails()),
             '/save-city-name': (context) => AuthShield(child: SaveCityName()),
             '/save-location': (context) => AuthShield(child: SaveLocation()),
             '/save-phone-number': (context) =>
