@@ -3,6 +3,7 @@ import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import "../widgets/TakeTextInput.dart";
 import "../widgets/SaveButton.dart";
+import "../widgets/Spinner.dart";
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -10,17 +11,72 @@ import "../widgets/SaveButton.dart";
 //   }SaveButton
 // }
 
-class MainBody extends StatelessWidget {
+class MainBody extends StatefulWidget {
+  @override
+  _MainBodyState createState() => _MainBodyState();
+}
+
+class _MainBodyState extends State<MainBody> {
+  @override
+  void initState() {
+    super.initState();
+    var state = Provider.of<CentralState>(context, listen: false);
+
+    state.clearData("makeDonation");
+    state.update("image", null);
+    state.update("title", null);
+    state.update("tags", null);
+  }
+
   @override
   Widget build(BuildContext context) {
+    Map data = context.watch<CentralState>().data;
+    Function load = context.watch<CentralState>().load;
+
+    Map<String, dynamic> body = {
+      "title": data["Title"],
+      "tags": data["Tags"],
+      "image": data["Image"]
+    };
+
+    void save() {
+      load("makeDonation", "/donation", body: body, method: "get");
+    }
+
+    if (data["makeDonation"] != null) {
+      return Center(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          SizedBox(height: 50),
+          Text(
+            "🙏 ",
+            style: TextStyle(fontSize: 100),
+          ),
+          SizedBox(height: 25),
+          Text(
+            "Thankyou",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 15),
+          Text(
+            " your donation has been posted",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
+          )
+        ]),
+      );
+    }
+
+    if (data["loading-makeDonation"] != null) {
+      if (data["loading-makeDonation"] == true) Spinner();
+    }
+
     return SingleChildScrollView(
         child: Column(children: [
-      TakeTextInput("title"),
-      TakeTextInput("imageURL"),
-      TakeTextInput("tag"),
-      TakeTextInput("city"),
-      TakeTextInput("gps"),
-      SaveButton(),
+      TakeTextInput("Title"),
+      TakeTextInput("Image"),
+      TakeTextInput("Tags"),
+      SaveButton(save),
     ]));
   }
 }

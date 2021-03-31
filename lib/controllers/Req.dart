@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String baseUrl = "10.0.2.2:8080";
 
-Future<Map> fetch(String path,
+dynamic fetch(String path,
     [Map<String, dynamic> payload = const {}, String method = "GET"]) async {
   String? cookie = await readCookie();
   Map<String, dynamic>? query;
@@ -22,7 +22,7 @@ Future<Map> fetch(String path,
     print("doing fetching...");
     response = await get(url, headers: headers);
   } else {
-    response = await post(url, headers: headers, body: payload);
+    response = await post(url, headers: headers, body: jsonEncode(payload));
   }
 
   Map data = jsonDecode(response.body);

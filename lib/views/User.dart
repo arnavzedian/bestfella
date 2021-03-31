@@ -13,7 +13,7 @@ import '../widgets/RenderCards.dart';
 // }
 
 const Widget DonationHeader = Text(
-  'Profile',
+  'Donations',
   style: TextStyle(
       color: Colors.black87, fontSize: 40.0, fontWeight: FontWeight.bold),
 );
@@ -43,11 +43,9 @@ class User extends StatelessWidget {
             backgroundColor: Colors.grey[200]),
         body: SafeArea(
             child: Container(
-                padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
-                height: MediaQuery.of(context).size.height,
-                child: Stack(children: [
-                  MainBody(),
-                  Positioned(bottom: 30, right: 30, child: BottomBar()),
-                ]))));
+          padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
+          height: MediaQuery.of(context).size.height,
+          child: MainBody(),
+        )));
   }
 }

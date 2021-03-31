@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import "./controllers/Req.dart";
 import '../controllers/Global.dart' as globals;
+import 'package:flutter/material.dart';
 
 class CentralState with ChangeNotifier {
   Map<String, dynamic> config = {"loading": false};
@@ -35,13 +36,15 @@ class CentralState with ChangeNotifier {
       var data = await fetch(path, body, method);
       config["loading-$taskName"] = false;
       config[taskName] = data;
+      print("taskName");
+      print(config);
       notifyListeners();
       if (callback != null) {
         callback();
       }
     } catch (error) {
       if (globals.showDialog != null) {
-        globals.showDialog?.call("error", error);
+        globals.showDialog?.call("error", error.toString());
       }
     }
   }

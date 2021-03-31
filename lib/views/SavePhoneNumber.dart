@@ -16,7 +16,7 @@ class MainBody extends StatelessWidget {
     return SingleChildScrollView(
         child: Column(children: [
       TakeTextInput("Your Phone number"),
-      SaveButton(),
+      SaveButton(() {}),
     ]));
   }
 }

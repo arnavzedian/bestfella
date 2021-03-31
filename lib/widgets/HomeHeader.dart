@@ -15,7 +15,7 @@ class CityButton extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(context, '/save-city-name');
         },
-        child: new Container(
+        child: Container(
           // width: 100.0,
           padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
           // height: 30.0,

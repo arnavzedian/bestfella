@@ -15,6 +15,8 @@ class Home extends StatelessWidget {
       onPressed: () async {
         await Auth.signOut();
         removeLocalStorage("cookie");
+        removeLocalStorage("gps");
+        removeLocalStorage("city");
       },
     );
   }

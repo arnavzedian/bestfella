@@ -7,12 +7,16 @@ class TakeTextInput extends StatelessWidget {
   final String placeholder;
   @override
   Widget build(BuildContext context) {
+    Function update = context.read<CentralState>().update;
+
     return Container(
         padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
         child: TextField(
-          onChanged: (_) {},
+          onChanged: (val) {
+            update(placeholder, val);
+          },
           onSubmitted: (_) {},
-          decoration: InputDecoration(hintText: "Write New Category name"),
+          decoration: InputDecoration(hintText: placeholder),
         ));
   }
 }

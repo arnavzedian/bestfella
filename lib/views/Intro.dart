@@ -9,7 +9,7 @@ final Widget logo = SvgPicture.asset(assetName, semanticsLabel: 'Logo ');
 
 final String assetName2 = 'assets/google.svg';
 final Widget google =
-    SvgPicture.asset(assetName, semanticsLabel: 'Google logo');
+    SvgPicture.asset(assetName2, semanticsLabel: 'Google logo');
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -20,13 +20,13 @@ final Widget google =
 const Widget DonationHeader = Text(
   'Make someone happy',
   style: TextStyle(
-      color: Colors.black87, fontSize: 40.0, fontWeight: FontWeight.bold),
+      color: Colors.black87, fontSize: 30.0, fontWeight: FontWeight.bold),
 );
 
 const Widget DonationHeader2 = Text(
   'Make a donation',
   style: TextStyle(
-      color: Colors.black87, fontSize: 20.0, fontWeight: FontWeight.bold),
+      color: Colors.black87, fontSize: 22.0, fontWeight: FontWeight.bold),
 );
 
 class LoginWithGoogle extends StatelessWidget {
@@ -37,12 +37,33 @@ class LoginWithGoogle extends StatelessWidget {
 
     void attemptSignIn() async {
       try {
+        update("loading-signin", true);
         String? cookie = await Auth.signIn();
+        update("loading-signin", false);
         if (cookie != null) saveLocalStorage("cookie", cookie);
       } catch (enError) {
         update("error", enError);
       }
     }
+    /*
+ Container(
+          // width: 100.0,
+          padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
+          // height: 30.0,
+          decoration: new BoxDecoration(
+            color: Colors.grey[50],
+            border: new Border.all(color: Colors.black26, width: 2.0),
+            borderRadius: new BorderRadius.circular(10.0),
+          ),
+          child: new Center(
+            child: new Text(
+              'City: Darbhanga',
+              style: new TextStyle(fontSize: 15.0, color: Colors.black26),
+            ),
+          ),
+        )
+
+    */
 
     return GestureDetector(
         onTap: attemptSignIn,
@@ -50,10 +71,23 @@ class LoginWithGoogle extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             child: Container(
                 margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.blueAccent)),
-                child: Row(children: [google, Text("Login with google")]))));
+                padding: const EdgeInsets.all(20.0),
+                decoration: new BoxDecoration(
+                  color: Colors.grey[50],
+                  border: new Border.all(color: Colors.black, width: 2.0),
+                  borderRadius: new BorderRadius.circular(200.0),
+                ),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  google,
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Text(
+                    "Login with google",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  )
+                ]))));
   }
 }
 
@@ -62,8 +96,17 @@ class MainBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Column(children: [
+      SizedBox(
+        height: 50.0,
+      ),
       logo,
+      SizedBox(
+        height: 30.0,
+      ),
       DonationHeader,
+      SizedBox(
+        height: 10.0,
+      ),
       DonationHeader2,
       SizedBox(
         height: 300.0,
@@ -77,16 +120,6 @@ class Intro extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            centerTitle: true,
-            elevation: 0,
-            iconTheme: IconThemeData(color: Colors.black87),
-            shadowColor: Colors.grey[50],
-            title: Text(
-              'Profile',
-              style: TextStyle(color: Colors.black87),
-            ),
-            backgroundColor: Colors.grey[200]),
         body: SafeArea(
             child: Container(
                 padding: EdgeInsets.fromLTRB(25, 25, 25, 0),

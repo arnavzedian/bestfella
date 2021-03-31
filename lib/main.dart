@@ -5,7 +5,6 @@ import "./CentralState.dart";
 import 'package:provider/provider.dart';
 // import './widgets/Home.dart';
 import './views/Home.dart';
-import './views/Intro.dart';
 import './views/DonationDetails.dart';
 import './views/MakeDonation.dart';
 import './views/SaveCityName.dart';
@@ -14,8 +13,8 @@ import './views/SavePhoneNumber.dart';
 import './views/User.dart';
 
 import './widgets/AuthShield.dart';
-import './controllers/Global.dart' as globals;
 
+// Unhandled Exception: No MaterialLocalizations foun
 void main() {
   runApp(MyApp());
 }
@@ -23,33 +22,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    void _showMyDialog(String text, String text2) async {
-      showDialog<void>(
-        context: context,
-        barrierDismissible: true, // user must tap button!
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(text),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[Text(text2)],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: Text('Okay'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-
-    globals.showDialog = _showMyDialog;
-
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => CentralState()),
@@ -64,7 +36,7 @@ class MyApp extends StatelessWidget {
             '/save-location': (context) => AuthShield(child: SaveLocation()),
             '/save-phone-number': (context) =>
                 AuthShield(child: SavePhoneNumber()),
-            '/user': (context) => AuthShield(child: User()),
+            '/profile': (context) => AuthShield(child: User()),
           },
         ));
   }
