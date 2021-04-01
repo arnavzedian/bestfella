@@ -80,11 +80,6 @@ class _ProfileState extends State<Profile> {
       }
     }
 
-    print("userProfile");
-    print(
-      data['userProfile'],
-    );
-
     if (data["userProfile"] == null) {
       return Text("data not loaded");
     }

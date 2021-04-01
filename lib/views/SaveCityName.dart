@@ -21,7 +21,7 @@ class MainBody extends StatelessWidget {
         "City",
       ),
       SaveButton(() {
-        if (data["city"] != null) saveLocalStorage("city", data["city"]);
+        if (data["City"] != null) saveLocalStorage("city", data["City"]);
       }),
     ]));
   }

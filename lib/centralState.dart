@@ -36,8 +36,7 @@ class CentralState with ChangeNotifier {
       var data = await fetch(path, body, method);
       config["loading-$taskName"] = false;
       config[taskName] = data;
-      print("taskName");
-      print(config);
+
       notifyListeners();
       if (callback != null) {
         callback();
@@ -68,7 +67,6 @@ class CentralState with ChangeNotifier {
     await preferences.remove(field);
     config[field] = null;
     notifyListeners();
-    print("removed $field");
   }
 
   void readLocalStorage(String field) async {
@@ -81,7 +79,7 @@ class CentralState with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(field, value);
     config[field] = value;
-    print("saving $field");
+
     notifyListeners();
   }
 

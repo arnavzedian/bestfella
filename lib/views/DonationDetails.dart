@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import "package:flutter/material.dart";
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
@@ -32,17 +30,17 @@ class CustomButton extends StatelessWidget {
         SizedBox(height: 10),
         Container(
           // width: 100.0,
-          padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
           // height: 30.0,
           decoration: new BoxDecoration(
             color: Colors.grey[50],
-            border: new Border.all(color: Colors.black26, width: 2.0),
-            borderRadius: new BorderRadius.circular(10.0),
+            border: new Border.all(color: Colors.black87, width: 2.0),
+            borderRadius: new BorderRadius.circular(25.0),
           ),
           child: new Center(
             child: new Text(
               txt,
-              style: new TextStyle(fontSize: 15.0, color: Colors.black26),
+              style: new TextStyle(fontSize: 15.0, color: Colors.black87),
             ),
           ),
         )
@@ -128,9 +126,11 @@ class MainBody extends StatelessWidget {
             child: Column(children: [
           DonationInfo(),
           Text("Render gps"),
+          SizedBox(height: 150),
           Row(
             children: [
               CustomButton("Get direction", () {}),
+              SizedBox(width: 15),
               CustomButton("Request phone number", () => requestPhoneNumber())
             ],
           )

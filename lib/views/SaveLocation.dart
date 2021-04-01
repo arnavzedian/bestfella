@@ -17,9 +17,10 @@ class MainBody extends StatelessWidget {
     Map data = context.watch<CentralState>().data;
     return SingleChildScrollView(
         child: Column(children: [
-      TakeTextInput("GPS"),
+      TakeTextInput("GPS location"),
       SaveButton(() {
-        if (data["GPS"] != null) saveLocalStorage("GPS", data["GPS"]);
+        if (data["GPS location"] != null)
+          saveLocalStorage("GPS", data["GPS location"]);
       }),
     ]));
   }

@@ -37,7 +37,9 @@ class _MainBodyState extends State<MainBody> {
     Map<String, dynamic> body = {
       "title": data["Title"],
       "tags": data["Tags"],
-      "image": data["Image"]
+      "image": data["Image"],
+      "GPS": data["GPS"],
+      "city": data["city"],
     };
 
     void save() {
@@ -92,8 +94,8 @@ class _MakeDonationState extends State<MakeDonation> {
   void initState() {
     super.initState();
     var state = Provider.of<CentralState>(context, listen: false);
-    state.clearData("userProfile");
-    state.load("userProfile", "/profile");
+    state.clearData("phoneNumber");
+    state.load("phoneNumber", "/phone-number");
   }
 
   @override

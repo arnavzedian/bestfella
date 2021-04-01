@@ -31,14 +31,25 @@ class _RenderCardsState extends State<RenderCards> {
   Widget build(BuildContext context) {
     final Map data = context.watch<CentralState>().data;
     if (data["loading-donations"] != null) {
-      if (data["loading-donations"] != true) return Spinner();
+      if (data["loading-donations"] == true) return Spinner();
     }
+
+    if (data["donations"] == null) return Text("data not loaded");
 
     final List list = data["donations"];
 
-    return Column(
-        children: list.map((item) {
-      return DonationCard(item.image, item.title, item.tags,item.id);
-    }).toList());
+    return Column(children: [
+      Column(
+          children: list.map((item) {
+        Map itemData = item.cast<String, dynamic>();
+        print(itemData);
+        // return Text(itemData["title"]);
+        return DonationCard(
+            item["image"], item["title"], item["tags"], item["_id"]);
+      }).toList()),
+      SizedBox(
+        height: 100,
+      )
+    ]);
   }
 }

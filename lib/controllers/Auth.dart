@@ -21,8 +21,6 @@ class Auth {
 
       String? accessToken = ggAuth?.accessToken;
 
-      print(accessToken);
-
       Map cookieData =
           await fetch("/auth/cookie", {"accessToken": accessToken});
       return cookieData["token"];
