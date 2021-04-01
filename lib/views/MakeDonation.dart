@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 import "../widgets/TakeTextInput.dart";
 import "../widgets/SaveButton.dart";
 import "../widgets/Spinner.dart";
+import "./SaveLocation.dart";
+import "./SavePhoneNumber.dart";
+import "../widgets/Loading.dart";
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -22,10 +25,8 @@ class _MainBodyState extends State<MainBody> {
     super.initState();
     var state = Provider.of<CentralState>(context, listen: false);
 
-    state.clearData("makeDonation");
-    state.update("image", null);
-    state.update("title", null);
-    state.update("tags", null);
+    state.clearData("phoneNumber");
+    state.load("phoneNumber", "/phone-number");
   }
 
   @override
@@ -81,9 +82,29 @@ class _MainBodyState extends State<MainBody> {
   }
 }
 
-class MakeDonation extends StatelessWidget {
+class MakeDonation extends StatefulWidget {
+  @override
+  _MakeDonationState createState() => _MakeDonationState();
+}
+
+class _MakeDonationState extends State<MakeDonation> {
+  @override
+  void initState() {
+    super.initState();
+    var state = Provider.of<CentralState>(context, listen: false);
+    state.clearData("userProfile");
+    state.load("userProfile", "/profile");
+  }
+
   @override
   Widget build(BuildContext context) {
+    Map data = context.watch<CentralState>().data;
+
+    if (data["loading-phoneNumber"] != null) {
+      if (data["loading-phoneNumber"] == true) return Loading();
+    }
+    if (data["phoneNumber"] == null) return SavePhoneNumber();
+    if (data["GPS"] == null) return SaveLocation();
     return Scaffold(
         appBar: AppBar(
             centerTitle: true,

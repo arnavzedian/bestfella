@@ -2,23 +2,55 @@ import "package:flutter/material.dart";
 import 'package:flutter_svg/flutter_svg.dart';
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
+import "../classes/ScreenArguments.dart";
 
 class DonationCard extends StatelessWidget {
-  DonationCard();
+  DonationCard(this.image, this.title, this.tags, this.id);
+  //'https://placeimg.com/640/480/any'
+  final String image;
+  final String title;
+  final String tags;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-        borderRadius: BorderRadius.circular(15),
-        child: Card(
-            child: Image.network(
-              'https://placeimg.com/640/480/any',
-              fit: BoxFit.fill,
+    Function change = context.read<CentralState>().change;
+
+    void gotoDetailsPage() {
+      change("image", image);
+      change("title", title);
+      change("tags", tags);
+      change("id", id);
+
+      Navigator.pushNamed(context, '/donation-details',
+          arguments: ScreenArguments(image, title, tags, id));
+    }
+
+    return GestureDetector(
+        onTap: gotoDetailsPage,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(
+              width: 2,
+              color: Colors.black,
+              style: BorderStyle.solid,
             ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+            image: DecorationImage(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
             ),
-            elevation: 5,
-            margin: EdgeInsets.all(10)));
+          ),
+          child: Column(children: [
+            Text(
+              title,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            Text(tags)
+          ]) /* add child content here */,
+        ));
   }
 }

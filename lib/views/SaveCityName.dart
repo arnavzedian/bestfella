@@ -13,10 +13,16 @@ import "../widgets/SaveButton.dart";
 class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Function saveLocalStorage = context.watch<CentralState>().saveLocalStorage;
+    Map data = context.watch<CentralState>().data;
     return SingleChildScrollView(
         child: Column(children: [
-      TakeTextInput("Your City Name"),
-      SaveButton(() {}),
+      TakeTextInput(
+        "City",
+      ),
+      SaveButton(() {
+        if (data["city"] != null) saveLocalStorage("city", data["city"]);
+      }),
     ]));
   }
 }

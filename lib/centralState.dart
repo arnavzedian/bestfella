@@ -17,7 +17,7 @@ class CentralState with ChangeNotifier {
 
   CentralState() {
     this.readLocalStorage("cookie");
-    this.readLocalStorage("gps");
+    this.readLocalStorage("GPS");
     this.readLocalStorage("city");
   }
 
@@ -51,6 +51,14 @@ class CentralState with ChangeNotifier {
 
   void update(String field, value) {
     config[field] = value;
+    notifyListeners();
+  }
+
+  void change(String field, value) {
+    config[field] = value;
+  }
+
+  void render() {
     notifyListeners();
   }
   //run readTodoList();

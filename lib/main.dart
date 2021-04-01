@@ -11,7 +11,7 @@ import './views/SaveCityName.dart';
 import './views/SaveLocation.dart';
 import './views/SavePhoneNumber.dart';
 import './views/User.dart';
-
+import "./classes/ScreenArguments.dart";
 import './widgets/AuthShield.dart';
 
 // Unhandled Exception: No MaterialLocalizations foun
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => AuthShield(child: Home()),
             '/make-donation': (context) => AuthShield(child: MakeDonation()),
-            '/donation-details': (context) =>
+            "/donation-details": (context) =>
                 AuthShield(child: DonationDetails()),
             '/save-city-name': (context) => AuthShield(child: SaveCityName()),
             '/save-location': (context) => AuthShield(child: SaveLocation()),

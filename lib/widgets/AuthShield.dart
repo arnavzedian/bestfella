@@ -3,7 +3,7 @@ import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import '../views/Intro.dart';
 import '../widgets/Loading.dart';
-
+import '../views/SaveCityName.dart';
 import '../controllers/Global.dart' as globals;
 
 class AuthShield extends StatelessWidget {
@@ -45,6 +45,11 @@ class AuthShield extends StatelessWidget {
     if (data["loading-signin"] != null) {
       if (data["loading-signin"] == true) return Loading();
     }
+
+    if (data["city"] == null) {
+      return SaveCityName();
+    }
+
     if (cookie == null) return Intro();
 
     return this.child;
