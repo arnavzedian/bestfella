@@ -108,7 +108,7 @@ class MainBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final Map data = context.watch<CentralState>().data;
     final String id = data["id"] == null ? "" : data["id"];
-    final Function load = context.watch<CentralState>().load;
+    final Function load = context.read<CentralState>().load;
 
     void callback(phoneNumber) {
       globals.showDialog?.call("Number", phoneNumber);

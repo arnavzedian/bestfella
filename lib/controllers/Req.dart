@@ -6,6 +6,7 @@ String baseUrl = "10.0.2.2:8080";
 
 dynamic fetch(String path,
     [Map<String, dynamic> payload = const {}, String method = "GET"]) async {
+  print("requesting... $method $path");
   String? cookie = await readCookie();
   Map<String, dynamic>? query;
 
@@ -30,10 +31,8 @@ dynamic fetch(String path,
     String error = data["error"];
     throw ("error $error");
   }
-  print("start-req.dart");
-  print(path);
-  print(data["data"]);
-  print("end-req.dart");
+
+  // print(data["data"]);
   return data["data"];
 }
 

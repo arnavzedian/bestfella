@@ -11,11 +11,14 @@ import './views/SaveCityName.dart';
 import './views/SaveLocation.dart';
 import './views/SavePhoneNumber.dart';
 import './views/User.dart';
-import "./classes/ScreenArguments.dart";
+
 import './widgets/AuthShield.dart';
 
 // Unhandled Exception: No MaterialLocalizations foun
 void main() {
+  print(
+      "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
   runApp(MyApp());
 }
 

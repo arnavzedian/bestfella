@@ -46,11 +46,11 @@ class AuthShield extends StatelessWidget {
       if (data["loading-signin"] == true) return Loading();
     }
 
+    if (cookie == null) return Intro();
+
     if (data["city"] == null) {
       return SaveCityName();
     }
-
-    if (cookie == null) return Intro();
 
     return this.child;
   }

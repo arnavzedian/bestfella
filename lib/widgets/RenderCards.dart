@@ -15,7 +15,6 @@ class RenderCards extends StatefulWidget {
 class _RenderCardsState extends State<RenderCards> {
   @override
   void initState() {
-    super.initState();
     var state = Provider.of<CentralState>(context, listen: false);
     state.clearData("donations");
 
@@ -25,6 +24,7 @@ class _RenderCardsState extends State<RenderCards> {
     }
 
     state.load("donations", "/donations", body: body);
+    super.initState();
   }
 
   @override
@@ -41,8 +41,8 @@ class _RenderCardsState extends State<RenderCards> {
     return Column(children: [
       Column(
           children: list.map((item) {
-        Map itemData = item.cast<String, dynamic>();
-        print(itemData);
+        // Map itemData = item.cast<String, dynamic>();
+        // print(itemData);
         // return Text(itemData["title"]);
         return DonationCard(
             item["image"], item["title"], item["tags"], item["_id"]);

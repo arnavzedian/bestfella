@@ -14,25 +14,11 @@ import "../widgets/Loading.dart";
 //   }SaveButton
 // }
 
-class MainBody extends StatefulWidget {
-  @override
-  _MainBodyState createState() => _MainBodyState();
-}
-
-class _MainBodyState extends State<MainBody> {
-  @override
-  void initState() {
-    super.initState();
-    var state = Provider.of<CentralState>(context, listen: false);
-
-    state.clearData("phoneNumber");
-    state.load("phoneNumber", "/phone-number");
-  }
-
+class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map data = context.watch<CentralState>().data;
-    Function load = context.watch<CentralState>().load;
+    Function load = context.read<CentralState>().load;
 
     Map<String, dynamic> body = {
       "title": data["Title"],

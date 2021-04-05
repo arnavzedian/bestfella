@@ -19,8 +19,8 @@ class MainBody extends StatefulWidget {
 class _MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
-    Function load = context.watch<CentralState>().load;
-    Function update = context.watch<CentralState>().update;
+    Function load = context.read<CentralState>().load;
+    Function update = context.read<CentralState>().update;
     Map data = context.watch<CentralState>().data;
 
     if (data["loading-savePhoneNumber"] != null) {

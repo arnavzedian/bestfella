@@ -26,14 +26,14 @@ const Widget DonationHeader = Text(
 const Widget DonationHeader2 = Text(
   'Make a donation',
   style: TextStyle(
-      color: Colors.black87, fontSize: 22.0, fontWeight: FontWeight.bold),
+      color: Colors.black87, fontSize: 22.0, fontWeight: FontWeight.normal),
 );
 
 class LoginWithGoogle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Function saveLocalStorage = context.watch<CentralState>().saveLocalStorage;
-    Function update = context.watch<CentralState>().update;
+    Function update = context.read<CentralState>().update;
 
     void attemptSignIn() async {
       try {

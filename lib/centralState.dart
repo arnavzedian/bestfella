@@ -23,7 +23,7 @@ class CentralState with ChangeNotifier {
 
   void clearData(String field) {
     config[field] = null;
-    notifyListeners();
+    //render();
   }
 
   void load(String taskName, String path,
@@ -31,13 +31,13 @@ class CentralState with ChangeNotifier {
       String method = "GET",
       Function? callback}) async {
     config["loading-$taskName"] = true;
-    notifyListeners();
+
     try {
       var data = await fetch(path, body, method);
       config["loading-$taskName"] = false;
       config[taskName] = data;
 
-      notifyListeners();
+      render();
       if (callback != null) {
         callback();
       }
@@ -50,7 +50,7 @@ class CentralState with ChangeNotifier {
 
   void update(String field, value) {
     config[field] = value;
-    notifyListeners();
+    render();
   }
 
   void change(String field, value) {
@@ -58,6 +58,7 @@ class CentralState with ChangeNotifier {
   }
 
   void render() {
+    print("requesting ui update");
     notifyListeners();
   }
   //run readTodoList();
@@ -66,13 +67,13 @@ class CentralState with ChangeNotifier {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.remove(field);
     config[field] = null;
-    notifyListeners();
+    render();
   }
 
   void readLocalStorage(String field) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     config[field] = prefs.getString(field);
-    notifyListeners();
+    render();
   }
 
   void saveLocalStorage(String field, value) async {
@@ -80,7 +81,7 @@ class CentralState with ChangeNotifier {
     prefs.setString(field, value);
     config[field] = value;
 
-    notifyListeners();
+    render();
   }
 
   /// Makes `Counter` readable inside the devtools by listing all of its properties

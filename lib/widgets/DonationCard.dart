@@ -39,6 +39,9 @@ class DonationImage extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
+    print("rendering card");
+    if (this.image.indexOf(".jpg") == -1) return Text("bad image");
+
     return ClipRRect(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(14), topRight: Radius.circular(14)),
