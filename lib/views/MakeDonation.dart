@@ -7,6 +7,7 @@ import "../widgets/Spinner.dart";
 import "./SaveLocation.dart";
 import "./SavePhoneNumber.dart";
 import "../widgets/Loading.dart";
+import "../widgets/ImageUploader.dart";
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -23,7 +24,7 @@ class MainBody extends StatelessWidget {
     Map<String, dynamic> body = {
       "title": data["Title"],
       "tags": data["Tags"],
-      "image": data["Image"],
+      "image": data["uploadedImage"],
       "GPS": data["GPS"],
       "city": data["city"],
     };
@@ -60,13 +61,25 @@ class MainBody extends StatelessWidget {
       if (data["loading-makeDonation"] == true) Spinner();
     }
 
-    return SingleChildScrollView(
-        child: Column(children: [
+    List<Widget> allWidgets = [
+      ImageUploader(),
+      SizedBox(height: 30),
       TakeTextInput("Title"),
-      TakeTextInput("Image"),
+      SizedBox(height: 30),
       TakeTextInput("Tags"),
-      SaveButton(save),
-    ]));
+    ];
+
+    if (data["Title"] != null &&
+        data["Tags"] != null &&
+        data["uploadedImage"] != null) {
+      allWidgets.add(SaveButton(save));
+    }
+
+    allWidgets.add(SizedBox(
+      height: 50,
+    ));
+
+    return SingleChildScrollView(child: Column(children: allWidgets));
   }
 }
 
@@ -81,6 +94,9 @@ class _MakeDonationState extends State<MakeDonation> {
     super.initState();
     var state = Provider.of<CentralState>(context, listen: false);
     state.clearData("phoneNumber");
+    state.clearData("Title");
+    state.clearData("Tags");
+    state.clearData("uploadedImage");
     state.load("phoneNumber", "/phone-number");
   }
 

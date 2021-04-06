@@ -1,5 +1,5 @@
 library my_prj.globals;
 
-import 'package:flutter/material.dart';
+String server = "10.0.2.2:8080";
 
 Function? showDialog;

@@ -1,8 +1,9 @@
 import 'package:http/http.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import './Global.dart' as globals;
 
-String baseUrl = "10.0.2.2:8080";
+String baseUrl = globals.server;
 
 dynamic fetch(String path,
     [Map<String, dynamic> payload = const {}, String method = "GET"]) async {

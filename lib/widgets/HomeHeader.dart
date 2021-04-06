@@ -11,6 +11,8 @@ class CityButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map data = context.watch<CentralState>().data;
+    String city = data["city"];
     return GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, '/save-city-name');
@@ -26,7 +28,7 @@ class CityButton extends StatelessWidget {
           ),
           child: new Center(
             child: new Text(
-              'City: Darbhanga',
+              'City: $city',
               style: new TextStyle(fontSize: 15.0, color: Colors.black26),
             ),
           ),

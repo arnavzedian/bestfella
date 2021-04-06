@@ -13,9 +13,11 @@ import './views/SavePhoneNumber.dart';
 import './views/User.dart';
 
 import './widgets/AuthShield.dart';
-
+// import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 // Unhandled Exception: No MaterialLocalizations foun
-void main() {
+
+Future main() async {
+  // await DotEnv.load();
   print(
       "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
