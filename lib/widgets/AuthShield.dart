@@ -48,7 +48,7 @@ class AuthShield extends StatelessWidget {
 
     if (cookie == null) return Intro();
 
-    if (data["city"] == null) {
+    if (data["preference-city"] == null) {
       return SaveCityName();
     }
 

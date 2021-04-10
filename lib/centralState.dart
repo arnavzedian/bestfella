@@ -22,9 +22,11 @@ class CentralState with ChangeNotifier {
 
   CentralState() {
     this.readLocalStorage("cookie");
-    this.readLocalStorage("latitude");
-    this.readLocalStorage("longitude");
-    this.readLocalStorage("city");
+    this.readLocalStorage("preference-latitude");
+    this.readLocalStorage("preference-longitude");
+    this.readLocalStorage("preference-city");
+    this.readLocalStorage("preference-state");
+    this.readLocalStorage("preference-country");
   }
 
   void clearData(String field) {
@@ -35,12 +37,13 @@ class CentralState with ChangeNotifier {
   void load(String taskName, String path,
       {Map<String, dynamic> body = const {},
       String method = "GET",
+      bool absolute = false,
       Function? callback,
       String source = "initState"}) async {
     config["loading-$taskName"] = true;
     if (source != "initState") render();
     try {
-      var data = await fetch(path, body, method);
+      var data = await fetch(path, body, method, absolute);
       config["loading-$taskName"] = false;
       config[taskName] = data;
 
@@ -91,7 +94,7 @@ class CentralState with ChangeNotifier {
     } else {
       this.config["uploadingImage"] = false;
       this.config["uploadedImage"] = data["data"]["url"];
-      print(data);
+
       render();
     }
   }

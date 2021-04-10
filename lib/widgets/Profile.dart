@@ -60,9 +60,11 @@ class _ProfileState extends State<Profile> {
     void logout() async {
       await Auth.signOut();
       removeLocalStorage("cookie");
-      removeLocalStorage("latitude");
-      removeLocalStorage("longitude");
-      removeLocalStorage("city");
+      removeLocalStorage("preference-latitude");
+      removeLocalStorage("preference-longitude");
+      removeLocalStorage("preference-city");
+      removeLocalStorage("preference-state");
+      removeLocalStorage("preference-country");
     }
 
     void gotoGPSedit() {

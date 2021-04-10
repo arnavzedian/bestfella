@@ -20,7 +20,7 @@ class _RenderCardsState extends State<RenderCards> {
 
     Map<String, dynamic> body = {"basis": "donater"};
     if (widget.type == "feeds") {
-      body = {"basis": "city", "value": state.data["city"]};
+      body = {"basis": "city", "value": state.data["preference-city"]};
     }
 
     String basis = body["basis"];
@@ -43,7 +43,7 @@ class _RenderCardsState extends State<RenderCards> {
 
     final List list = data["$donationType"];
 
-    String city = data['city'];
+    String city = data['preference-city'];
     if (list.length == 0)
       return Column(
         children: [

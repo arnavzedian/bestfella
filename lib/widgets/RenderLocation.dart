@@ -9,7 +9,6 @@ import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import "./Spinner.dart";
 import '../controllers/Global.dart' as globals;
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class TheImage extends StatelessWidget {
   TheImage(this.latitude, this.longitude, [this.smaller = 0]);

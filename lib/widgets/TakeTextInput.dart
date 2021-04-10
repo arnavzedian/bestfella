@@ -2,12 +2,19 @@ import "package:flutter/material.dart";
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
 
+void doNothing() {}
+
 class TakeTextInput extends StatefulWidget {
-  TakeTextInput(this.placeholder,
-      {this.takeNumber = false, this.initialValue = ""});
+  TakeTextInput(
+    this.placeholder, {
+    this.onChange = doNothing,
+    this.takeNumber = false,
+    this.initialValue = "",
+  });
   final String placeholder;
   final String initialValue;
   final bool takeNumber;
+  final Function onChange;
 
   @override
   _TakeTextInputState createState() => _TakeTextInputState();
@@ -26,6 +33,7 @@ class _TakeTextInputState extends State<TakeTextInput> {
           keyboardType:
               widget.takeNumber == false ? null : TextInputType.number,
           onChanged: (val) {
+            widget.onChange(val);
             update(widget.placeholder, val);
           },
           decoration: InputDecoration(hintText: widget.placeholder),

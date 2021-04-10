@@ -25,9 +25,11 @@ class MainBody extends StatelessWidget {
       "title": data["Title"],
       "tags": data["Tags"],
       "image": data["uploadedImage"],
-      "latitude": data["latitude"],
-      "longitude": data["longitude"],
-      "city": data["city"],
+      "latitude": data["preference-latitude"],
+      "longitude": data["preference-longitude"],
+      "city": data["preference-city"],
+      "state": data["preference-state"],
+      "country": data["preference-country"],
     };
 
     void save() {
@@ -109,7 +111,7 @@ class _MakeDonationState extends State<MakeDonation> {
       if (data["loading-phoneNumber"] == true) return Loading();
     }
     if (data["phoneNumber"] == null) return SavePhoneNumber();
-    if (data["latitude"] == null) return SaveLocation();
+    if (data["preference-latitude"] == null) return SaveLocation();
     return Scaffold(
         appBar: AppBar(
             centerTitle: true,

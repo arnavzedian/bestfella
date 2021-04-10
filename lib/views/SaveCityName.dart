@@ -2,8 +2,10 @@ import "package:flutter/material.dart";
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import '../widgets/TakeTextInput.dart';
-import "../widgets/SaveButton.dart";
+import "../widgets/RenderPlaces.dart";
 import '../controllers/Global.dart' as globals;
+import 'package:geolocator/geolocator.dart';
+
 // final mapToken = globals.env["mapboxToken"];
 
 // class TodoItem {
@@ -13,19 +15,58 @@ import '../controllers/Global.dart' as globals;
 //   }
 // }
 
-class MainBody extends StatelessWidget {
+class MainBody extends StatefulWidget {
+  @override
+  _MainBodyState createState() => _MainBodyState();
+}
+
+class _MainBodyState extends State<MainBody> {
+  void search(Function load, query) {
+    String? mapboxToken = globals.env["mapboxToken"];
+    String _url =
+        "https://api.mapbox.com/geocoding/v5/mapbox.places/$query.json?access_token=$mapboxToken";
+    load("searchCity", _url, absolute: true);
+  }
+
+  //to do
+  //  get geo location in init state
+  // on keyup make req to search
+  //  make a function to translate loaded data
+  // if data exist render a list with a onlclick event
+  // on clikc event will trigger a toast and a saveLocalstorage
+  //
+  //
+  //
+  void getCurrentLocation(Function searcher, Function loader) async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+
+    String lat = position.latitude.toString();
+    String long = position.longitude.toString();
+    searcher(loader, "$long,$lat");
+
+    print(position.latitude);
+  }
+
+  @override
+  void initState() {
+    var state = Provider.of<CentralState>(context, listen: false);
+    getCurrentLocation(this.search, state.load);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    Function saveLocalStorage = context.read<CentralState>().saveLocalStorage;
-    Map data = context.watch<CentralState>().data;
+    Function load = context.read<CentralState>().load;
+    void doSearcing(query) {
+      search(load, query);
+    }
+
     return SingleChildScrollView(
         child: Column(children: [
-      TakeTextInput(
-        "City",
-      ),
-      SaveButton(() {
-        if (data["City"] != null) saveLocalStorage("city", data["City"]);
-      }),
+      TakeTextInput("Search your city", onChange: doSearcing),
+      RenderPlaces()
     ]));
   }
 }

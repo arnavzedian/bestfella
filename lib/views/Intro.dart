@@ -45,25 +45,6 @@ class LoginWithGoogle extends StatelessWidget {
         update("error", enError);
       }
     }
-    /*
- Container(
-          // width: 100.0,
-          padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
-          // height: 30.0,
-          decoration: new BoxDecoration(
-            color: Colors.grey[50],
-            border: new Border.all(color: Colors.black26, width: 2.0),
-            borderRadius: new BorderRadius.circular(10.0),
-          ),
-          child: new Center(
-            child: new Text(
-              'City: Darbhanga',
-              style: new TextStyle(fontSize: 15.0, color: Colors.black26),
-            ),
-          ),
-        )
-
-    */
 
     return GestureDetector(
         onTap: attemptSignIn,

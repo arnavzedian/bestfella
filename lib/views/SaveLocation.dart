@@ -49,8 +49,9 @@ class _MainBodyState extends State<MainBody> {
         child: Column(children: [
       RenderLocation(latitude, longitude),
       SaveButton(() {
-        saveLocalStorage('longitude', longitude);
-        saveLocalStorage('latitude', latitude);
+        saveLocalStorage('preference-longitude', longitude);
+        saveLocalStorage('preference-latitude', latitude);
+
         Fluttertoast.showToast(
             msg: "Your location is saved",
             toastLength: Toast.LENGTH_SHORT,

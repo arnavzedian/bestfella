@@ -12,7 +12,7 @@ class CityButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map data = context.watch<CentralState>().data;
-    String city = data["city"];
+    String city = data["preference-city"];
     return GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, '/save-city-name');

@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import './Global.dart' as globals;
 
-String baseUrl = globals.server;
-
 dynamic fetch(String path,
-    [Map<String, dynamic> payload = const {}, String method = "GET"]) async {
+    [Map<String, dynamic> payload = const {},
+    String method = "GET",
+    absolute]) async {
+  String baseUrl = globals.server;
   print("requesting... $method $path");
   String? cookie = await readCookie();
   Map<String, dynamic>? query;
@@ -14,6 +15,10 @@ dynamic fetch(String path,
   if (method == "GET") query = payload;
 
   Uri url = Uri.http(baseUrl, "/api/v1$path", query);
+
+  if (absolute == true) {
+    url = Uri.parse(path);
+  }
 
   Response response;
   Map<String, String> headers = {
@@ -27,6 +32,10 @@ dynamic fetch(String path,
   }
 
   Map data = jsonDecode(response.body);
+
+  if (absolute == true) {
+    return data;
+  }
 
   if (data["error"] != null) {
     String error = data["error"];
