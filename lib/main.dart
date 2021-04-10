@@ -11,16 +11,20 @@ import './views/SaveCityName.dart';
 import './views/SaveLocation.dart';
 import './views/SavePhoneNumber.dart';
 import './views/User.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 import './widgets/AuthShield.dart';
 // import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 // Unhandled Exception: No MaterialLocalizations foun
+import '../controllers/Global.dart' as globals;
 
 Future main() async {
   // await DotEnv.load();
   print(
       "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-
+  await DotEnv.load(fileName: ".env");
+  print(DotEnv.env);
+  globals.env = DotEnv.env;
+  print(globals.env);
   runApp(MyApp());
 }
 

@@ -18,12 +18,24 @@ const Widget DonationHeader = Text(
       color: Colors.black87, fontSize: 40.0, fontWeight: FontWeight.bold),
 );
 
+const Widget note = Text(
+  'All posts are deleted after 1 month to keep operation cost low',
+  style: TextStyle(
+      color: Colors.black87, fontSize: 12.0, fontWeight: FontWeight.normal),
+);
+
 class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-        child: Column(
-            children: [Profile(), DonationHeader, RenderCards("profile")]));
+        child: Column(children: [
+      Profile(),
+      DonationHeader,
+      SizedBox(height: 12),
+      note,
+      SizedBox(height: 25),
+      RenderCards("profile")
+    ]));
   }
 }
 

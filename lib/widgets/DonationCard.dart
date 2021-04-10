@@ -5,8 +5,7 @@ import 'package:provider/provider.dart';
 import "../classes/ScreenArguments.dart";
 
 class InfoPart extends StatelessWidget {
-  InfoPart(this.title, this.tags);
-  //'https://placeimg.com/640/480/any'
+  InfoPart([this.title = "", this.tags = ""]);
   final String title;
   final String tags;
 
@@ -34,11 +33,13 @@ class InfoPart extends StatelessWidget {
 }
 
 class DonationImage extends StatelessWidget {
-  DonationImage(this.image);
+  DonationImage([this.image = ""]);
   //'https://placeimg.com/640/480/any'
   final String image;
+
   @override
   Widget build(BuildContext context) {
+    if (image == "") return Text("invalid image");
     print("rendering card");
     if (this.image.indexOf(".jpg") == -1) return Text("bad image");
 
@@ -55,23 +56,32 @@ class DonationImage extends StatelessWidget {
 }
 
 class DonationCard extends StatelessWidget {
-  DonationCard(this.image, this.title, this.tags, this.id);
+  DonationCard(
+      [this.image = "",
+      this.title = "",
+      this.tags = "",
+      this.id = "",
+      this.latitude = "",
+      this.longitude = ""]);
   //'https://placeimg.com/640/480/any'
   final String image;
   final String title;
   final String tags;
   final String id;
-
+  final String latitude;
+  final String longitude;
 //
   @override
   Widget build(BuildContext context) {
     Function change = context.read<CentralState>().change;
 
     void gotoDetailsPage() {
-      change("image", image);
-      change("title", title);
-      change("tags", tags);
-      change("id", id);
+      change("item-image", image);
+      change("item-title", title);
+      change("item-tags", tags);
+      change("item-id", id);
+      change("item-latitude", latitude);
+      change("item-longitude", longitude);
 
       Navigator.pushNamed(
         context,

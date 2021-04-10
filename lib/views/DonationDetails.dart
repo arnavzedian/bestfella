@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import '../widgets/BottomBar.dart';
 import '../controllers/Global.dart' as globals;
 import '../widgets/Spinner.dart';
-
+import '../widgets/renderLocation.dart';
+import 'package:url_launcher/url_launcher.dart';
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -54,9 +55,9 @@ class DonationInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     final Map data = context.watch<CentralState>().data;
 
-    final String image = data["image"] == null ? "" : data["image"];
-    final String title = data["title"] == null ? "" : data["title"];
-    final String tags = data["tags"] == null ? "" : data["tags"];
+    final String image = data["item-image"] == null ? "" : data["item-image"];
+    final String title = data["item-title"] == null ? "" : data["item-title"];
+    final String tags = data["item-tags"] == null ? "" : data["item-tags"];
 
     final String loaderName = "requestPhoneNumber";
     if (data["loading-$loaderName"] != null) {
@@ -74,9 +75,9 @@ class DonationInfo extends StatelessWidget {
                 ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Container(
-                      height: 130,
+                      height: 70,
                       color: Colors.grey[350],
-                      width: 130,
+                      width: 70,
                       child: Image.network(
                         image,
                         fit: BoxFit.cover,
@@ -107,7 +108,7 @@ class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map data = context.watch<CentralState>().data;
-    final String id = data["id"] == null ? "" : data["id"];
+    final String id = data["item-id"] == null ? "" : data["item-id"];
     final Function load = context.read<CentralState>().load;
 
     void callback(phoneNumber) {
@@ -120,16 +121,23 @@ class MainBody extends StatelessWidget {
           body: body, callback: callback);
     }
 
+    String lat = data["item-latitude"];
+    String long = data["item-longitude"];
+
     return Padding(
         padding: EdgeInsets.all(30),
         child: SingleChildScrollView(
             child: Column(children: [
           DonationInfo(),
-          Text("Render gps"),
-          SizedBox(height: 150),
+          RenderLocation(data["item-latitude"], data["item-longitude"], 150),
+          SizedBox(height: 25),
           Row(
             children: [
-              CustomButton("Get direction", () {}),
+              CustomButton("Get direction", () async {
+                String _url = 'https://maps.google.com/?q=$lat,$long';
+                print(_url);
+                launch(_url);
+              }),
               SizedBox(width: 15),
               CustomButton("Request phone number", () => requestPhoneNumber())
             ],

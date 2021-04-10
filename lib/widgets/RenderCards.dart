@@ -60,8 +60,25 @@ class _RenderCardsState extends State<RenderCards> {
         // Map itemData = item.cast<String, dynamic>();
         // print(itemData);
         // return Text(itemData["title"]);
-        return DonationCard(
-            item["image"], item["title"], item["tags"], item["_id"]);
+        //
+        //
+        if (item["image"] == null) item["image"] = "";
+        if (item["title"] == null) item["title"] = "";
+        if (item["tags"] == null) item["tags"] = "";
+        if (item["_id"] == null) item["_id"] = "";
+        if (item["latitude"] == null) {
+          item["latitude"] = "";
+        } else {
+          item["latitude"] = item["latitude"].toString();
+        }
+        if (item["longitude"] == null) {
+          item["longitude"] = "";
+        } else {
+          item["longitude"] = item["longitude"].toString();
+        }
+
+        return DonationCard(item["image"], item["title"], item["tags"],
+            item["_id"], item["latitude"], item["longitude"]);
       }).toList()),
       SizedBox(
         height: 100,

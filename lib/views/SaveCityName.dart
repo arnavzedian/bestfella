@@ -3,6 +3,9 @@ import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import '../widgets/TakeTextInput.dart';
 import "../widgets/SaveButton.dart";
+import '../controllers/Global.dart' as globals;
+// final mapToken = globals.env["mapboxToken"];
+
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {

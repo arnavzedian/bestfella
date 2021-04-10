@@ -22,7 +22,8 @@ class CentralState with ChangeNotifier {
 
   CentralState() {
     this.readLocalStorage("cookie");
-    this.readLocalStorage("GPS");
+    this.readLocalStorage("latitude");
+    this.readLocalStorage("longitude");
     this.readLocalStorage("city");
   }
 
@@ -97,6 +98,7 @@ class CentralState with ChangeNotifier {
 
   void update(String field, value) {
     config[field] = value;
+
     render();
   }
 

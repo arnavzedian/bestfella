@@ -3,6 +3,10 @@ import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import '../widgets/TakeTextInput.dart';
 import "../widgets/SaveButton.dart";
+import "../widgets/RenderLocation.dart";
+import "../widgets/Spinner.dart";
+import 'package:geolocator/geolocator.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -10,17 +14,52 @@ import "../widgets/SaveButton.dart";
 //   }
 // }
 
-class MainBody extends StatelessWidget {
+class MainBody extends StatefulWidget {
+  @override
+  _MainBodyState createState() => _MainBodyState();
+}
+
+class _MainBodyState extends State<MainBody> {
+  void getCurrentLocation(Function setLocation) async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    print(position.latitude);
+
+    setLocation("questioned-latitude", position.latitude.toString());
+    setLocation("questioned-longitude", position.longitude.toString());
+  }
+
+  @override
+  void initState() {
+    var state = Provider.of<CentralState>(context, listen: false);
+    getCurrentLocation(state.update);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    Function saveLocalStorage = context.read<CentralState>().saveLocalStorage;
     Map data = context.watch<CentralState>().data;
+    Function saveLocalStorage = context.read<CentralState>().saveLocalStorage;
+
+    if (data["questioned-latitude"] == null) return Spinner();
+    final String latitude = data["questioned-latitude"];
+    final String longitude = data["questioned-longitude"];
+
     return SingleChildScrollView(
         child: Column(children: [
-      TakeTextInput("GPS location"),
+      RenderLocation(latitude, longitude),
       SaveButton(() {
-        if (data["GPS location"] != null)
-          saveLocalStorage("GPS", data["GPS location"]);
+        saveLocalStorage('longitude', longitude);
+        saveLocalStorage('latitude', latitude);
+        Fluttertoast.showToast(
+            msg: "Your location is saved",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        //  Navigator.pushNamed(context, '/home');
       }),
     ]));
   }
@@ -36,7 +75,7 @@ class SaveLocation extends StatelessWidget {
             iconTheme: IconThemeData(color: Colors.black87),
             shadowColor: Colors.grey[50],
             title: Text(
-              'Save City Name',
+              'Save GPS',
               style: TextStyle(color: Colors.black87),
             ),
             backgroundColor: Colors.grey[200]),

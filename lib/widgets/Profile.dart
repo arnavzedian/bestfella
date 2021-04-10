@@ -60,7 +60,8 @@ class _ProfileState extends State<Profile> {
     void logout() async {
       await Auth.signOut();
       removeLocalStorage("cookie");
-      removeLocalStorage("gps");
+      removeLocalStorage("latitude");
+      removeLocalStorage("longitude");
       removeLocalStorage("city");
     }
 
