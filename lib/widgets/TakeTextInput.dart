@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
 
-void doNothing() {}
+void doNothing(String name) {}
 
 class TakeTextInput extends StatefulWidget {
   TakeTextInput(

@@ -18,13 +18,10 @@ import './widgets/AuthShield.dart';
 import '../controllers/Global.dart' as globals;
 
 Future main() async {
-  // await DotEnv.load();
   print(
       "-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
   await DotEnv.load(fileName: ".env");
-
   globals.env = DotEnv.env;
-
   runApp(MyApp());
 }
 

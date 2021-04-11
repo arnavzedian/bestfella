@@ -61,6 +61,7 @@ class DonationCard extends StatelessWidget {
       this.title = "",
       this.tags = "",
       this.id = "",
+      this.donater = "",
       this.latitude = "",
       this.longitude = ""]);
   //'https://placeimg.com/640/480/any'
@@ -69,6 +70,7 @@ class DonationCard extends StatelessWidget {
   final String tags;
   final String id;
   final String latitude;
+  final String donater;
   final String longitude;
 //
   @override
@@ -80,6 +82,7 @@ class DonationCard extends StatelessWidget {
       change("item-title", title);
       change("item-tags", tags);
       change("item-id", id);
+      change("item-donater", donater);
       change("item-latitude", latitude);
       change("item-longitude", longitude);
 

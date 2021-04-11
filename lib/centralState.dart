@@ -49,7 +49,7 @@ class CentralState with ChangeNotifier {
 
       render();
       if (callback != null) {
-        callback();
+        callback(data);
       }
     } catch (error) {
       if (globals.showDialog != null) {
@@ -126,6 +126,9 @@ class CentralState with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     config[field] = prefs.getString(field);
     render();
+    if (field == "cookie" && config[field] != null) {
+      this.load("userProfile", "/profile");
+    }
   }
 
   void saveLocalStorage(String field, value) async {

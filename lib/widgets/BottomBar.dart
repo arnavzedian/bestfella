@@ -45,7 +45,7 @@ class BottomButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey,
+                color: Color.fromRGBO(59, 59, 59, 0.16),
                 blurRadius: 4,
                 offset: Offset(4, 8), // Shadow position
               ),

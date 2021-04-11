@@ -14,11 +14,17 @@ class RenderCards extends StatefulWidget {
 
 class _RenderCardsState extends State<RenderCards> {
   String? donationType;
+  Map<String, dynamic> body = {"basis": "donater"};
+  Function? loader;
+  Future<void> refresh() async {
+    await loader?.call("$donationType", "/donations", body: body);
+    return null;
+  }
+
   @override
   void initState() {
     var state = Provider.of<CentralState>(context, listen: false);
-
-    Map<String, dynamic> body = {"basis": "donater"};
+    loader = state.load;
     if (widget.type == "feeds") {
       body = {"basis": "city", "value": state.data["preference-city"]};
     }
@@ -26,8 +32,7 @@ class _RenderCardsState extends State<RenderCards> {
     String basis = body["basis"];
     donationType = "donations-$basis";
     state.clearData("$donationType");
-
-    state.load("$donationType", "/donations", body: body);
+    this.refresh();
     super.initState();
   }
 
@@ -50,39 +55,51 @@ class _RenderCardsState extends State<RenderCards> {
           SizedBox(
             height: 50,
           ),
-          Text("Be the first to make a donation in your city $city"),
+          Text("Be the first donater in $city"),
         ],
       );
 
-    return Column(children: [
-      Column(
-          children: list.map((item) {
-        // Map itemData = item.cast<String, dynamic>();
-        // print(itemData);
-        // return Text(itemData["title"]);
-        //
-        //
-        if (item["image"] == null) item["image"] = "";
-        if (item["title"] == null) item["title"] = "";
-        if (item["tags"] == null) item["tags"] = "";
-        if (item["_id"] == null) item["_id"] = "";
-        if (item["latitude"] == null) {
-          item["latitude"] = "";
-        } else {
-          item["latitude"] = item["latitude"].toString();
-        }
-        if (item["longitude"] == null) {
-          item["longitude"] = "";
-        } else {
-          item["longitude"] = item["longitude"].toString();
-        }
+    return RefreshIndicator(
+      onRefresh: this.refresh,
+      child: Column(children: [
+        Column(
+            children: list.map((item) {
+          // Map itemData = item.cast<String, dynamic>();
+          // print(itemData);
+          // return Text(itemData["title"]);
+          //
+          print(item);
+          //
+          if (item["image"] == null) item["image"] = "";
+          if (item["title"] == null) item["title"] = "";
+          if (item["tags"] == null) item["tags"] = "";
+          if (item["_id"] == null) item["_id"] = "";
+          if (item["donater"] == null) item["donater"] = "";
 
-        return DonationCard(item["image"], item["title"], item["tags"],
-            item["_id"], item["latitude"], item["longitude"]);
-      }).toList()),
-      SizedBox(
-        height: 100,
-      )
-    ]);
+          if (item["latitude"] == null) {
+            item["latitude"] = "";
+          } else {
+            item["latitude"] = item["latitude"].toString();
+          }
+          if (item["longitude"] == null) {
+            item["longitude"] = "";
+          } else {
+            item["longitude"] = item["longitude"].toString();
+          }
+
+          return DonationCard(
+              item["image"],
+              item["title"],
+              item["tags"],
+              item["_id"],
+              item["donater"],
+              item["latitude"],
+              item["longitude"]);
+        }).toList()),
+        SizedBox(
+          height: 100,
+        )
+      ]),
+    );
   }
 }

@@ -20,9 +20,10 @@ const Widget DonationHeader = Text(
 );
 
 class CustomButton extends StatelessWidget {
-  CustomButton(this.txt, this.onTap);
+  CustomButton(this.txt, this.onTap, [this.width]);
   final String txt;
   final Function onTap;
+  final double? width;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,6 +31,7 @@ class CustomButton extends StatelessWidget {
       child: Column(children: [
         SizedBox(height: 10),
         Container(
+          width: width,
           // width: 100.0,
           padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
           // height: 30.0,
@@ -111,19 +113,45 @@ class MainBody extends StatelessWidget {
     final String id = data["item-id"] == null ? "" : data["item-id"];
     final Function load = context.read<CentralState>().load;
 
-    void callback(phoneNumber) {
-      globals.showDialog?.call("Number", phoneNumber);
+    void callback(int phoneNumber) {
+      String number = phoneNumber.toString();
+      globals.showDialog?.call("Number", number);
+    }
+
+    void callback2(bool data) {
+      globals.showDialog?.call("Success", "This donation has been deleted");
     }
 
     void requestPhoneNumber() {
-      Map body = {"donationID": id};
-      load("requestPhoneNumber", "/request-phone-number",
-          body: body, callback: callback);
+      Map<String, dynamic> body = {"donationID": id};
+      load(
+        "requestPhoneNumber",
+        "/request-phone-number",
+        body: body,
+        method: "POST",
+        callback: callback,
+      );
+    }
+
+    void deletePost() {
+      Map<String, dynamic> body = {"donationID": id};
+      load("delete", "/delete-donation",
+          body: body, method: "POST", callback: callback2);
     }
 
     String lat = data["item-latitude"];
     String long = data["item-longitude"];
 
+    Widget deleteButton = SizedBox(
+      height: 0,
+    );
+
+    if (data["userProfile"] != null) {
+      if (data["userProfile"]["id"] == data["item-donater"]) {
+        deleteButton =
+            CustomButton("Delete Post", () => deletePost(), double.infinity);
+      }
+    }
     return Padding(
         padding: EdgeInsets.all(30),
         child: SingleChildScrollView(
@@ -141,7 +169,8 @@ class MainBody extends StatelessWidget {
               SizedBox(width: 15),
               CustomButton("Request phone number", () => requestPhoneNumber())
             ],
-          )
+          ),
+          deleteButton
         ])));
   }
 }
