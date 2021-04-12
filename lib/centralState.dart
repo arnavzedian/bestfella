@@ -105,7 +105,7 @@ class CentralState with ChangeNotifier {
     render();
   }
 
-  void change(String field, value) {
+  void updateWithoutRefresh(String field, value) {
     config[field] = value;
   }
 

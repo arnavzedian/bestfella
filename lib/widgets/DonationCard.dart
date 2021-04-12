@@ -5,9 +5,10 @@ import 'package:provider/provider.dart';
 import "../classes/ScreenArguments.dart";
 
 class InfoPart extends StatelessWidget {
-  InfoPart([this.title = "", this.tags = ""]);
+  InfoPart([this.title = "", this.tags = "", this.type = ""]);
   final String title;
   final String tags;
+  final String type;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +28,35 @@ class InfoPart extends StatelessWidget {
           Text(tags),
           SizedBox(
             height: 10,
-          )
+          ),
+          Text(type),
         ]));
+  }
+}
+
+class MoreInfo extends StatelessWidget {
+  MoreInfo(this.itemData);
+  final Map itemData;
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> widgets = [];
+
+    void doCheckingAndAdd(String name) {
+      if (itemData[name] != null) {
+        if (itemData[name] != "") {
+          var value = itemData[name];
+          widgets.add(Text("$name $value"));
+        }
+      }
+    }
+
+    doCheckingAndAdd("stock");
+    doCheckingAndAdd("securityAmount");
+    doCheckingAndAdd("price");
+    doCheckingAndAdd("period");
+
+    return Column(children: widgets);
   }
 }
 
@@ -56,35 +84,30 @@ class DonationImage extends StatelessWidget {
 }
 
 class DonationCard extends StatelessWidget {
-  DonationCard(
-      [this.image = "",
-      this.title = "",
-      this.tags = "",
-      this.id = "",
-      this.donater = "",
-      this.latitude = "",
-      this.longitude = ""]);
+  DonationCard(this.itemData);
   //'https://placeimg.com/640/480/any'
-  final String image;
-  final String title;
-  final String tags;
-  final String id;
-  final String latitude;
-  final String donater;
-  final String longitude;
+  final Map<String, dynamic> itemData;
+
 //
   @override
   Widget build(BuildContext context) {
-    Function change = context.read<CentralState>().change;
+    Function updateWithoutRefresh =
+        context.read<CentralState>().updateWithoutRefresh;
 
     void gotoDetailsPage() {
-      change("item-image", image);
-      change("item-title", title);
-      change("item-tags", tags);
-      change("item-id", id);
-      change("item-donater", donater);
-      change("item-latitude", latitude);
-      change("item-longitude", longitude);
+      updateWithoutRefresh("item-image", itemData['image']);
+      updateWithoutRefresh("item-title", itemData['title']);
+      updateWithoutRefresh("item-tags", itemData['tags']);
+      updateWithoutRefresh("item-id", itemData['_id']);
+
+      updateWithoutRefresh("item-stock", itemData['stock']);
+      updateWithoutRefresh("item-type", itemData['type']);
+      updateWithoutRefresh("item-price", itemData['price']);
+      updateWithoutRefresh("item-period", itemData['period']);
+      updateWithoutRefresh("item-securityAmount", itemData['securityAmount']);
+
+      updateWithoutRefresh("item-latitude", itemData['latitude'].toString());
+      updateWithoutRefresh("item-longitude", itemData['longitude'].toString());
 
       Navigator.pushNamed(
         context,
@@ -108,8 +131,8 @@ class DonationCard extends StatelessWidget {
               ),
             ),
             child: Wrap(children: [
-              DonationImage(this.image),
-              InfoPart(this.title, this.tags)
+              DonationImage(itemData['image']),
+              InfoPart(itemData['title'], itemData['tags'], itemData['type'])
             ]),
           ))
     ]);

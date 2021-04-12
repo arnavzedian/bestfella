@@ -70,31 +70,31 @@ class _RenderCardsState extends State<RenderCards> {
           //
           print(item);
           //
-          if (item["image"] == null) item["image"] = "";
-          if (item["title"] == null) item["title"] = "";
-          if (item["tags"] == null) item["tags"] = "";
-          if (item["_id"] == null) item["_id"] = "";
-          if (item["donater"] == null) item["donater"] = "";
+          // if (item["image"] == null) item["image"] = "";
 
-          if (item["latitude"] == null) {
-            item["latitude"] = "";
-          } else {
-            item["latitude"] = item["latitude"].toString();
-          }
-          if (item["longitude"] == null) {
-            item["longitude"] = "";
-          } else {
-            item["longitude"] = item["longitude"].toString();
-          }
+          // if (item["stock"] == null) item["stock"] = "";
+          // if (item["type"] == null) item["type"] = "";
+          // if (item["period"] == null) item["period"] = "";
+          // if (item["price"] == null) item["price"] = "";
+          // if (item["securityAmount"] == null) item["securityAmount"] = "";
 
-          return DonationCard(
-              item["image"],
-              item["title"],
-              item["tags"],
-              item["_id"],
-              item["donater"],
-              item["latitude"],
-              item["longitude"]);
+          // if (item["title"] == null) item["title"] = "";
+          // if (item["tags"] == null) item["tags"] = "";
+          // if (item["_id"] == null) item["_id"] = "";
+          // if (item["donater"] == null) item["donater"] = "";
+
+          // if (item["latitude"] == null) {
+          //   item["latitude"] = "";
+          // } else {
+          //   item["latitude"] = item["latitude"].toString();
+          // }
+          // if (item["longitude"] == null) {
+          //   item["longitude"] = "";
+          // } else {
+          //   item["longitude"] = item["longitude"].toString();
+          // }
+
+          return DonationCard(item);
         }).toList()),
         SizedBox(
           height: 100,

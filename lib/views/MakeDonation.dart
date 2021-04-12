@@ -7,6 +7,9 @@ import "../widgets/Spinner.dart";
 import "./SaveLocation.dart";
 import "./SavePhoneNumber.dart";
 import "../widgets/Loading.dart";
+import "../widgets/PostTypeToggler.dart";
+import "../widgets/TypeSpecificFields.dart";
+
 import "../widgets/ImageUploader.dart";
 // class TodoItem {
 //   String item;
@@ -28,6 +31,11 @@ class MainBody extends StatelessWidget {
       "latitude": data["preference-latitude"],
       "longitude": data["preference-longitude"],
       "city": data["preference-city"],
+      "stock": data["Stock"],
+      "type": data["preference-PostType"],
+      "period": data["preference-period"],
+      "securityAmount": data["Security Amount"],
+      "price": data["Price"],
       "state": data["preference-state"],
       "country": data["preference-country"],
     };
@@ -52,7 +60,7 @@ class MainBody extends StatelessWidget {
           ),
           SizedBox(height: 15),
           Text(
-            " your donation has been posted",
+            "Your post is now live",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal),
           )
@@ -70,6 +78,8 @@ class MainBody extends StatelessWidget {
       TakeTextInput("Title"),
       SizedBox(height: 30),
       TakeTextInput("Tags"),
+      PostTypeToggler(),
+      TypeSpecificFields()
     ];
 
     if (data["Title"] != null &&
@@ -99,6 +109,11 @@ class _MakeDonationState extends State<MakeDonation> {
     state.clearData("phoneNumber");
     state.clearData("Title");
     state.clearData("Tags");
+    state.clearData("Stock");
+    state.clearData("Period");
+    state.clearData("Price");
+    state.clearData("Security Amount");
+
     state.clearData("uploadedImage");
     state.load("phoneNumber", "/phone-number");
   }
