@@ -32,12 +32,13 @@ class _TakeTextInputState extends State<TakeTextInput> {
     if (label == "") label = widget.placeholder;
     return Container(
         padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+        margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
         child: TextField(
           keyboardType:
               widget.takeNumber == false ? null : TextInputType.number,
           onChanged: (val) {
             widget.onChange(val);
-            update(widget.placeholder, val);
+            update(label, val);
           },
           decoration: InputDecoration(hintText: widget.placeholder),
         ));

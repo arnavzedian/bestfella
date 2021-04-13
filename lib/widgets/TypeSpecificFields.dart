@@ -4,6 +4,8 @@ import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import '../classes/ScreenArguments.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'TakeTextInput.dart';
+import 'DropDownList.dart';
 
 class TypeSpecificFields extends StatelessWidget {
   TypeSpecificFields();
@@ -11,31 +13,32 @@ class TypeSpecificFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map data = context.watch<CentralState>().data;
-    Function update = context.read<CentralState>().update;
+
     String currentType = "Rent";
 
     if (data["preference-postType"] != null) {
       currentType = data["preference-postType"];
     }
 
-    void changeCurrentPostType(String newType) {
-      update("preference-postType", newType);
-    }
+    List<Widget> inputWidgets = [];
 
+    if (currentType == "Rent") {
+      inputWidgets.add(TakeTextInput(
+          "Security Amount (to be retuned at the end of rent)",
+          label: "Security Amount",
+          takeNumber: true));
+      inputWidgets.add(DropDownList(
+          "period", ["weekly", "daily", "monthly", "quaterly", "yearly"]));
+      inputWidgets.add(TakeTextInput("Price", takeNumber: true));
+    } else if (currentType == "Sell") {
+      inputWidgets.add(TakeTextInput("Price", takeNumber: true));
+      // inputWidgets.add(TakeTextInput("Stock", takeNumber: true));
+    } else if (currentType == "Used") {
+      inputWidgets.add(TakeTextInput("Price", takeNumber: true));
+    }
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50),
-          border: Border.all(
-            width: 2,
-            color: Colors.black,
-            style: BorderStyle.solid,
-          )),
-      child: Row(children: [
-        TypeButton(changeCurrentPostType, currentType, "Rent"),
-        TypeButton(changeCurrentPostType, currentType, "Donate"),
-        TypeButton(changeCurrentPostType, currentType, "Sell")
-      ]),
+      child: Column(children: inputWidgets),
     );
   }
 }

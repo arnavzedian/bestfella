@@ -7,8 +7,8 @@ import "../widgets/Spinner.dart";
 import "./SaveLocation.dart";
 import "./SavePhoneNumber.dart";
 import "../widgets/Loading.dart";
-import "../widgets/PostTypeToggler.dart";
-import "../widgets/TypeSpecificFields.dart";
+import '../widgets/TypeSpecificFields.dart';
+import '../widgets/ChangePostType.dart';
 
 import "../widgets/ImageUploader.dart";
 // class TodoItem {
@@ -24,6 +24,8 @@ class MainBody extends StatelessWidget {
     Map data = context.watch<CentralState>().data;
     Function load = context.read<CentralState>().load;
 
+    String period = "weekly";
+    if (data["dropdown-period"] != null) period = data["dropdown-period"];
     Map<String, dynamic> body = {
       "title": data["Title"],
       "tags": data["Tags"],
@@ -33,7 +35,7 @@ class MainBody extends StatelessWidget {
       "city": data["preference-city"],
       "stock": data["Stock"],
       "type": data["preference-PostType"],
-      "period": data["preference-period"],
+      "period": period,
       "securityAmount": data["Security Amount"],
       "price": data["Price"],
       "state": data["preference-state"],
@@ -73,20 +75,48 @@ class MainBody extends StatelessWidget {
     }
 
     List<Widget> allWidgets = [
+      ChangePostType(),
+      SizedBox(height: 30),
       ImageUploader(),
       SizedBox(height: 30),
       TakeTextInput("Title"),
-      SizedBox(height: 30),
       TakeTextInput("Tags"),
-      PostTypeToggler(),
       TypeSpecificFields()
     ];
 
-    if (data["Title"] != null &&
-        data["Tags"] != null &&
-        data["uploadedImage"] != null) {
+    void ifAvailable(List<String> items, Function callback) {
+      bool shouldAllow = true;
+      items.forEach((element) {
+        if (data[element] == null) {
+          shouldAllow = false;
+          //  print(data[element]);
+          print("$element not defined");
+        }
+      });
+      if (shouldAllow == true) callback();
+    }
+
+    String postType = "Rent";
+
+    if (data["preference-postType"] != null) {
+      postType = data["preference-postType"];
+    }
+
+    void allowSaveButton() {
       allWidgets.add(SaveButton(save));
     }
+
+    ifAvailable(["Title", "Tags", "uploadedImage"], () {
+      if (postType == "Rent") {
+        ifAvailable(["Security Amount", "Price"], allowSaveButton);
+      } else if (postType == "Donate") {
+        allowSaveButton();
+      } else if (postType == "Sell") {
+        ifAvailable(["Price"], allowSaveButton);
+      } else if (postType == "Used") {
+        ifAvailable(["Price"], allowSaveButton);
+      }
+    });
 
     allWidgets.add(SizedBox(
       height: 50,

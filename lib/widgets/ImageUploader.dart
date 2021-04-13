@@ -19,6 +19,8 @@ class ImageUploader extends StatelessWidget {
     if (data["uploadingImage"] == true)
       widgetToShow = CircularProgressIndicator();
 
+    // print(data["uploadedImage"]);
+
     if (data["uploadedImage"] != null)
       widgetToShow = Image.network(data["uploadedImage"],
           height: 300, width: double.infinity, fit: BoxFit.cover);

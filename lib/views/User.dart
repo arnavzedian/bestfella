@@ -30,9 +30,9 @@ class MainBody extends StatelessWidget {
     return SingleChildScrollView(
         child: Column(children: [
       Profile(),
-      DonationHeader,
-      SizedBox(height: 12),
-      note,
+      // DonationHeader,
+      // SizedBox(height: 12),
+      // note,
       SizedBox(height: 25),
       RenderCards("profile")
     ]));

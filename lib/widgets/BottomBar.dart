@@ -77,7 +77,7 @@ class BottomBar extends StatelessWidget {
       child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
         BottomButton(wid: home, callback: gotoHome),
         BottomButton(wid: profile, callback: gotoProfile),
-        BottomButton(wid: heart, callback: gotoMakeDonation, txt: "Donate"),
+        BottomButton(wid: heart, callback: gotoMakeDonation, txt: "Post"),
       ]),
     );
   }
