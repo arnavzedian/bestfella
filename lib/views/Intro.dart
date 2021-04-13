@@ -18,16 +18,22 @@ final Widget google =
 // }
 
 const Widget DonationHeader = Text(
-  'Make someone happy',
+  'Rent . Donate . Sell',
   style: TextStyle(
       color: Colors.black87, fontSize: 30.0, fontWeight: FontWeight.bold),
 );
 
-const Widget DonationHeader2 = Text(
-  'Make a donation',
-  style: TextStyle(
-      color: Colors.black87, fontSize: 22.0, fontWeight: FontWeight.normal),
-);
+class HeroText extends StatelessWidget {
+  HeroText(this.opacity);
+  final double opacity;
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: this.opacity,
+      child: DonationHeader,
+    );
+  }
+}
 
 class LoginWithGoogle extends StatelessWidget {
   @override
@@ -75,25 +81,28 @@ class LoginWithGoogle extends StatelessWidget {
 class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(children: [
-      SizedBox(
-        height: 50.0,
-      ),
-      logo,
-      SizedBox(
-        height: 30.0,
-      ),
-      DonationHeader,
-      SizedBox(
-        height: 10.0,
-      ),
-      DonationHeader2,
-      SizedBox(
-        height: 300.0,
-      ),
-      LoginWithGoogle()
-    ]));
+    return Stack(children: [
+      SingleChildScrollView(
+          child: Column(children: [
+        SizedBox(
+          height: 50.0,
+        ),
+        logo,
+        SizedBox(
+          height: 30.0,
+        ),
+        HeroText(1),
+        HeroText(0.8),
+        HeroText(0.5),
+        SizedBox(
+          height: 10.0,
+        ),
+        SizedBox(
+          height: 300.0,
+        ),
+      ])),
+      Positioned(child: LoginWithGoogle())
+    ]);
   }
 }
 

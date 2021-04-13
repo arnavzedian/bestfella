@@ -18,7 +18,11 @@ class MainBody extends StatelessWidget {
     return Stack(children: [
       Container(
           padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
-          child: RenderCards("feeds")),
+          child: RenderCards(
+              "feeds",
+              SizedBox(
+                height: 0,
+              ))),
       Positioned(left: 0, top: 0, child: HomeHeader())
     ]);
   }

@@ -27,15 +27,7 @@ const Widget note = Text(
 class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(children: [
-      Profile(),
-      // DonationHeader,
-      // SizedBox(height: 12),
-      // note,
-      SizedBox(height: 25),
-      RenderCards("profile")
-    ]));
+    return RenderCards("profile", Profile());
   }
 }
 

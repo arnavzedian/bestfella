@@ -5,13 +5,17 @@ import '../widgets/BottomBar.dart';
 import '../controllers/Global.dart' as globals;
 import '../widgets/Spinner.dart';
 import '../widgets/renderLocation.dart';
+import '../widgets/AdditionalData.dart';
 import 'package:url_launcher/url_launcher.dart';
-// class TodoItem {
-//   String item;
-//   TodoItem(String item) {
-//     this.item = item;
-//   }
-// }
+import 'package:flutter_svg/flutter_svg.dart';
+import '../widgets/DetailPageMainButton.dart';
+import '../widgets/SimpleButton.dart';
+
+final String assetName = 'assets/map.svg';
+final Widget mapSVG = SvgPicture.asset(assetName, semanticsLabel: 'mapSVG ');
+
+final String assetName2 = 'assets/call.svg';
+final Widget callSVG = SvgPicture.asset(assetName2, semanticsLabel: 'callSVG ');
 
 const Widget DonationHeader = Text(
   'Profile',
@@ -148,30 +152,39 @@ class MainBody extends StatelessWidget {
 
     if (data["userProfile"] != null) {
       if (data["userProfile"]["id"] == data["item-donater"]) {
-        deleteButton =
-            CustomButton("Delete Post", () => deletePost(), double.infinity);
+        deleteButton = SimpleButton("Delete Post", () => deletePost());
       }
     }
-    return Padding(
-        padding: EdgeInsets.all(30),
-        child: SingleChildScrollView(
-            child: Column(children: [
-          DonationInfo(),
-          RenderLocation(data["item-latitude"], data["item-longitude"], 150),
-          SizedBox(height: 25),
-          Row(
-            children: [
-              CustomButton("Get direction", () async {
-                String _url = 'https://maps.google.com/?q=$lat,$long';
-                print(_url);
-                launch(_url);
-              }),
-              SizedBox(width: 15),
-              CustomButton("Request phone number", () => requestPhoneNumber())
-            ],
-          ),
-          deleteButton
-        ])));
+
+    void openMap() async {
+      String _url = 'https://maps.google.com/?q=$lat,$long';
+      print(_url);
+      launch(_url);
+    }
+
+    var mainButtons = Container(
+        width: double.infinity,
+        child: Row(
+          children: [
+            DetailPageMainButton(mapSVG, "Get direction", openMap),
+            DetailPageMainButton(
+                callSVG, "Request phone number", requestPhoneNumber)
+          ],
+        ));
+
+    return Stack(children: [
+      Padding(
+          padding: EdgeInsets.all(30),
+          child: SingleChildScrollView(
+              child: Column(children: [
+            DonationInfo(),
+            AdditionalData(data, "item-"),
+            RenderLocation(data["item-latitude"], data["item-longitude"], 150),
+            SizedBox(height: 25),
+            deleteButton,
+          ]))),
+      Positioned(bottom: 0, left: 0, child: mainButtons)
+    ]);
   }
 }
 

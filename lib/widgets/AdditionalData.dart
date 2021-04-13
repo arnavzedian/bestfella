@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import '../StringExtension.dart';
 
 class AdditionalData extends StatelessWidget {
-  AdditionalData(this.itemData);
+  AdditionalData(this.itemData, [this.prefix = ""]);
   final Map itemData;
-
+  final String prefix;
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [];
@@ -30,11 +30,11 @@ class AdditionalData extends StatelessWidget {
     }
 
     // doCheckingAndAdd("type");
-    doCheckingAndAdd("stock");
-    doCheckingAndAdd("securityAmount");
-    doCheckingAndAdd("price");
+    doCheckingAndAdd(prefix + "stock");
+    doCheckingAndAdd(prefix + "securityAmount");
+    doCheckingAndAdd(prefix + "price");
 
-    doCheckingAndAdd("period");
+    doCheckingAndAdd(prefix + "period");
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start, children: widgets);
   }

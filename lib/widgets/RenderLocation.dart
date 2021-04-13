@@ -9,6 +9,11 @@ import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import "./Spinner.dart";
 import '../controllers/Global.dart' as globals;
+import 'package:flutter_svg/flutter_svg.dart';
+
+final String assetName = 'assets/userOnMap.svg';
+final Widget userOnMap =
+    SvgPicture.asset(assetName, semanticsLabel: 'userOnMap ');
 
 class TheImage extends StatelessWidget {
   TheImage(this.latitude, this.longitude, [this.smaller = 0]);
@@ -61,10 +66,10 @@ class RenderLocation extends StatelessWidget {
         child: Stack(children: [
           TheImage(latitude, longitude, smaller),
           Align(
-              child: Text(
-                "♥",
-                style: TextStyle(fontSize: 25, color: Colors.black),
-              ),
+              child: Container(
+                  padding: EdgeInsets.all(50),
+                  child: userOnMap,
+                  color: Color.fromRGBO(59, 59, 59, 0.16)),
               alignment: Alignment.center)
         ]),
       ),

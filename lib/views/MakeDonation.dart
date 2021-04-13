@@ -103,8 +103,10 @@ class MainBody extends StatelessWidget {
       postType = data["preference-postType"];
     }
 
+    bool showSaveButton = false;
+
     void allowSaveButton() {
-      allWidgets.add(SaveButton(save));
+      showSaveButton = true;
     }
 
     ifAvailable(["Title", "Tags", "uploadedImage"], () {
@@ -123,7 +125,12 @@ class MainBody extends StatelessWidget {
       height: 50,
     ));
 
-    return SingleChildScrollView(child: Column(children: allWidgets));
+    return Stack(
+      children: [
+        SingleChildScrollView(child: Column(children: allWidgets)),
+        showSaveButton == true ? SaveButton(save) : SizedBox()
+      ],
+    );
   }
 }
 

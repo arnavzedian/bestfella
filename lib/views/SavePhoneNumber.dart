@@ -27,8 +27,7 @@ class _MainBodyState extends State<MainBody> {
       if (data["loading-savePhoneNumber"] == true) Spinner();
     }
 
-    return SingleChildScrollView(
-        child: Column(children: [
+    return Stack(children: [
       TakeTextInput("Phone Number", takeNumber: true),
       SaveButton(() {
         if (data["Phone Number"] != null) {
@@ -44,7 +43,7 @@ class _MainBodyState extends State<MainBody> {
               body: body, method: "POST", callback: callback);
         }
       }),
-    ]));
+    ]);
   }
 }
 

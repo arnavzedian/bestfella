@@ -7,6 +7,7 @@ import "../widgets/RenderLocation.dart";
 import "../widgets/Spinner.dart";
 import 'package:geolocator/geolocator.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -45,8 +46,7 @@ class _MainBodyState extends State<MainBody> {
     final String latitude = data["questioned-latitude"];
     final String longitude = data["questioned-longitude"];
 
-    return SingleChildScrollView(
-        child: Column(children: [
+    return Stack(children: [
       RenderLocation(latitude, longitude),
       SaveButton(() {
         saveLocalStorage('preference-longitude', longitude);
@@ -62,7 +62,7 @@ class _MainBodyState extends State<MainBody> {
             fontSize: 16.0);
         //  Navigator.pushNamed(context, '/home');
       }),
-    ]));
+    ]);
   }
 }
 

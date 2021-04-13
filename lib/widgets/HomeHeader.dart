@@ -47,6 +47,18 @@ class HomeHeader extends StatelessWidget {
             height: 35,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Container(child: logo), CityButton()])));
+                children: [
+                  Container(
+                      child: Row(
+                    children: [
+                      logo,
+                      Text("Bestfella",
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold))
+                    ],
+                  )),
+                  CityButton()
+                ])));
   }
 }
