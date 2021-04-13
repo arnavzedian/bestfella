@@ -8,36 +8,29 @@ class DetailPageMainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var center = new Center(
-      child: Row(children: [
+      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         icon,
         SizedBox(
           width: 10,
         ),
         Text(
           txt,
-          style: new TextStyle(fontSize: 15.0, color: Colors.black26),
+          style: new TextStyle(fontSize: 15.0, color: Colors.white),
         )
       ]),
     );
 
-    return GestureDetector(
-      onTap: () => {onTap()},
-      child: Column(children: [
-        SizedBox(height: 10),
-        Expanded(
-            flex: 1,
-            child: Container(
-              // width: 100.0,
-              padding: EdgeInsets.fromLTRB(20, 7, 20, 7),
-              // height: 30.0,
-              decoration: new BoxDecoration(
-                color: Colors.grey[50],
-                border: new Border.all(color: Colors.black26, width: 2.0),
-                borderRadius: new BorderRadius.circular(10.0),
-              ),
-              child: center,
-            ))
-      ]),
+    var container = Container(
+      height: 70,
+      padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+      color: Colors.black,
+      child: center,
     );
+    return Expanded(
+        flex: 1,
+        child: GestureDetector(
+          onTap: () => {onTap()},
+          child: container,
+        ));
   }
 }

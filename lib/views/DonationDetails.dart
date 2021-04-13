@@ -10,6 +10,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/DetailPageMainButton.dart';
 import '../widgets/SimpleButton.dart';
+import '../StringExtension.dart';
 
 final String assetName = 'assets/map.svg';
 final Widget mapSVG = SvgPicture.asset(assetName, semanticsLabel: 'mapSVG ');
@@ -93,7 +94,7 @@ class DonationInfo extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title,
+                    Text(title.capitalize(),
                         style: TextStyle(
                             color: Colors.black87,
                             fontSize: 25.0,
@@ -163,26 +164,30 @@ class MainBody extends StatelessWidget {
     }
 
     var mainButtons = Container(
-        width: double.infinity,
+        width: MediaQuery.of(context).size.width,
         child: Row(
           children: [
-            DetailPageMainButton(mapSVG, "Get direction", openMap),
-            DetailPageMainButton(
-                callSVG, "Request phone number", requestPhoneNumber)
+            DetailPageMainButton(mapSVG, "Open Map", openMap),
+            DetailPageMainButton(callSVG, "Call", requestPhoneNumber)
           ],
         ));
 
     return Stack(children: [
-      Padding(
+      Container(
+          height: MediaQuery.of(context).size.height,
           padding: EdgeInsets.all(30),
           child: SingleChildScrollView(
-              child: Column(children: [
-            DonationInfo(),
-            AdditionalData(data, "item-"),
-            RenderLocation(data["item-latitude"], data["item-longitude"], 150),
-            SizedBox(height: 25),
-            deleteButton,
-          ]))),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                DonationInfo(),
+                AdditionalData(data, "item-"),
+                SizedBox(height: 25),
+                RenderLocation(
+                    data["item-latitude"], data["item-longitude"], 150),
+                SizedBox(height: 25),
+                deleteButton,
+              ]))),
       Positioned(bottom: 0, left: 0, child: mainButtons)
     ]);
   }

@@ -70,14 +70,10 @@ class DonationImage extends StatelessWidget {
     if (this.image.indexOf(".jpg") == -1) return Text("bad image");
 
     return ClipRRect(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(14), topRight: Radius.circular(14)),
-        child: Expanded(
-          // width: double.infinity,
-          // height: 200,
-          flex: 1,
-          child: Image.network(image, fit: BoxFit.cover),
-        ));
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(14), topRight: Radius.circular(14)),
+      child: Image.network(image, fit: BoxFit.cover),
+    );
   }
 }
 

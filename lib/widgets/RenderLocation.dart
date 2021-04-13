@@ -67,9 +67,12 @@ class RenderLocation extends StatelessWidget {
           TheImage(latitude, longitude, smaller),
           Align(
               child: Container(
-                  padding: EdgeInsets.all(50),
-                  child: userOnMap,
-                  color: Color.fromRGBO(59, 59, 59, 0.16)),
+                padding: EdgeInsets.all(50),
+                child: userOnMap,
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(59, 59, 59, 0.16),
+                    borderRadius: BorderRadius.circular(500)),
+              ),
               alignment: Alignment.center)
         ]),
       ),

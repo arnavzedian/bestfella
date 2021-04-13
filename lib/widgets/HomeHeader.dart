@@ -41,24 +41,25 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        flex: 1,
-        child: Container(
-            height: 35,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Container(
+        padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
+        width: MediaQuery.of(context).size.width,
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Container(
+              height: 35,
+              child: Row(
                 children: [
-                  Container(
-                      child: Row(
-                    children: [
-                      logo,
-                      Text("Bestfella",
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.bold))
-                    ],
-                  )),
-                  CityButton()
-                ])));
+                  logo,
+                  SizedBox(width: 10),
+                  Text("Bestfella",
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold))
+                ],
+              )),
+          CityButton()
+        ]));
   }
 }

@@ -20,7 +20,7 @@ class SaveButton extends StatelessWidget {
       child: GestureDetector(
           onTap: () => {callback()},
           child: Container(
-            width: double.infinity,
+            width: MediaQuery.of(context).size.width,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
@@ -31,7 +31,7 @@ class SaveButton extends StatelessWidget {
                     decoration: new BoxDecoration(
                       color: Colors.black,
                       border: new Border.all(color: Colors.black54, width: 2.0),
-                      borderRadius: new BorderRadius.circular(20.0),
+                      borderRadius: new BorderRadius.circular(0.0),
                     ),
                     child: Text(
                       'Save',
@@ -39,7 +39,8 @@ class SaveButton extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20.0,
-                          fontWeight: FontWeight.normal),
+                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold),
                     )),
               ],
             ),

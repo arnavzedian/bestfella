@@ -18,6 +18,7 @@ class AdditionalData extends StatelessWidget {
           if (fieldName == "securityAmount") {
             fieldName = "Security Amount";
           }
+          fieldName = fieldName.replaceAll(prefix, "");
           fieldName = fieldName.capitalize().trim();
           String value = itemData[name].toString();
           value = value.capitalize();

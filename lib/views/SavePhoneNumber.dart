@@ -19,6 +19,19 @@ class MainBody extends StatefulWidget {
 class _MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
+    return Expanded(
+        flex: 1, child: TakeTextInput("Phone Number", takeNumber: true));
+  }
+}
+
+class SavePhoneNumber extends StatefulWidget {
+  @override
+  _SavePhoneNumberState createState() => _SavePhoneNumberState();
+}
+
+class _SavePhoneNumberState extends State<SavePhoneNumber> {
+  @override
+  Widget build(BuildContext context) {
     Function load = context.read<CentralState>().load;
     Function update = context.read<CentralState>().update;
     Map data = context.watch<CentralState>().data;
@@ -27,29 +40,11 @@ class _MainBodyState extends State<MainBody> {
       if (data["loading-savePhoneNumber"] == true) Spinner();
     }
 
-    return Stack(children: [
-      TakeTextInput("Phone Number", takeNumber: true),
-      SaveButton(() {
-        if (data["Phone Number"] != null) {
-          final Map<String, dynamic> body = {
-            "phoneNumber": data["Phone Number"]
-          };
+    var container = Container(
+        height: MediaQuery.of(context).size.height,
+        padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
+        child: MainBody());
 
-          void callback() {
-            update("phoneNumber", data["Phone Number"]);
-          }
-
-          load("savePhoneNumber", "/phone-number",
-              body: body, method: "POST", callback: callback);
-        }
-      }),
-    ]);
-  }
-}
-
-class SavePhoneNumber extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
             centerTitle: true,
@@ -62,8 +57,22 @@ class SavePhoneNumber extends StatelessWidget {
             ),
             backgroundColor: Colors.grey[200]),
         body: SafeArea(
-            child: Container(
-                padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
-                child: MainBody())));
+            child: Stack(children: [
+          container,
+          SaveButton(() {
+            if (data["Phone Number"] != null) {
+              final Map<String, dynamic> body = {
+                "phoneNumber": data["Phone Number"]
+              };
+
+              void callback() {
+                update("phoneNumber", data["Phone Number"]);
+              }
+
+              load("savePhoneNumber", "/phone-number",
+                  body: body, method: "POST", callback: callback);
+            }
+          })
+        ])));
   }
 }

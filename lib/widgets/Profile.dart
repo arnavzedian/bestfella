@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import '../controllers/Auth.dart';
-import "./SimpleButton.dart";
+import 'SimpleButton.dart';
 import './Spinner.dart';
 
 class Profile extends StatefulWidget {

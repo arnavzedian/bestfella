@@ -82,7 +82,7 @@ class _RenderCardsState extends State<RenderCards> {
               return new StaggeredTile.fit(1);
             },
             itemBuilder: (BuildContext context, int index) {
-              if (index == 1) return widget.headerWidget;
+              if (index == 0) return widget.headerWidget;
               return DonationCard(list[index - 1]);
             }));
   }

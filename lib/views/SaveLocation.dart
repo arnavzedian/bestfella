@@ -40,35 +40,43 @@ class _MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
     Map data = context.watch<CentralState>().data;
-    Function saveLocalStorage = context.read<CentralState>().saveLocalStorage;
 
-    if (data["questioned-latitude"] == null) return Spinner();
     final String latitude = data["questioned-latitude"];
     final String longitude = data["questioned-longitude"];
-
-    return Stack(children: [
-      RenderLocation(latitude, longitude),
-      SaveButton(() {
-        saveLocalStorage('preference-longitude', longitude);
-        saveLocalStorage('preference-latitude', latitude);
-
-        Fluttertoast.showToast(
-            msg: "Your location is saved",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-        //  Navigator.pushNamed(context, '/home');
-      }),
-    ]);
+    if (data["questioned-latitude"] == null) return Spinner();
+    return RenderLocation(latitude, longitude);
   }
 }
 
 class SaveLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Map data = context.watch<CentralState>().data;
+    Function saveLocalStorage = context.read<CentralState>().saveLocalStorage;
+
+    var container = Container(
+        // height: MediaQuery.of(context).size.height,
+        padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
+        child: MainBody());
+
+    Widget theButton = SaveButton(() {
+      if (data["questioned-latitude"] == null) return null;
+      final String latitude = data["questioned-latitude"];
+      final String longitude = data["questioned-longitude"];
+      saveLocalStorage('preference-longitude', longitude);
+      saveLocalStorage('preference-latitude', latitude);
+
+      Fluttertoast.showToast(
+          msg: "Your location is saved",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      //  Navigator.pushNamed(context, '/home');
+    });
+
     return Scaffold(
         appBar: AppBar(
             centerTitle: true,
@@ -82,7 +90,7 @@ class SaveLocation extends StatelessWidget {
             backgroundColor: Colors.grey[200]),
         body: SafeArea(
             child: Container(
-                padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
-                child: MainBody())));
+                height: MediaQuery.of(context).size.height,
+                child: Stack(children: [container, theButton]))));
   }
 }
