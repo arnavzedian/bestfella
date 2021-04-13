@@ -43,6 +43,7 @@ class CentralState with ChangeNotifier {
     config["loading-$taskName"] = true;
     if (source != "initState") render();
     try {
+      print(method);
       var data = await fetch(path, body, method, absolute);
       config["loading-$taskName"] = false;
       config[taskName] = data;

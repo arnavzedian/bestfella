@@ -8,6 +8,7 @@ dynamic fetch(String path,
     String method = "GET",
     absolute]) async {
   String baseUrl = globals.server;
+  print(payload);
   print("requesting... $method $path");
   String? cookie = await readCookie();
   Map<String, dynamic>? query;
@@ -32,6 +33,8 @@ dynamic fetch(String path,
   }
 
   Map data = jsonDecode(response.body);
+
+  print(data);
 
   if (absolute == true) {
     return data;

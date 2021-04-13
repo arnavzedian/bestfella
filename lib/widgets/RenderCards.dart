@@ -3,6 +3,7 @@ import "./DonationCard.dart";
 import "../CentralState.dart";
 import 'package:provider/provider.dart';
 import "./Spinner.dart";
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class RenderCards extends StatefulWidget {
   RenderCards(this.type);
@@ -59,47 +60,69 @@ class _RenderCardsState extends State<RenderCards> {
         ],
       );
 
+    const List<StaggeredTile> _staggeredTiles = <StaggeredTile>[];
+    const List<Widget> tiles = [];
+
+    list.map((item) {
+      tiles.add(DonationCard(item));
+      _staggeredTiles.add(StaggeredTile.count(2, 2));
+    });
+
     return RefreshIndicator(
-      onRefresh: this.refresh,
-      child: Column(children: [
-        Column(
-            children: list.map((item) {
-          // Map itemData = item.cast<String, dynamic>();
-          // print(itemData);
-          // return Text(itemData["title"]);
-          //
-          print(item);
-          //
-          // if (item["image"] == null) item["image"] = "";
+        onRefresh: this.refresh,
+        child: StaggeredGridView.countBuilder(
+            // shrinkWrap: true,
+            //
+            itemCount: list.length,
+            crossAxisCount: 2,
+            crossAxisSpacing: 4,
+            mainAxisSpacing: 4,
+            staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
+            itemBuilder: (BuildContext context, int index) {
+              return DonationCard(list[index]);
+            }));
 
-          // if (item["stock"] == null) item["stock"] = "";
-          // if (item["type"] == null) item["type"] = "";
-          // if (item["period"] == null) item["period"] = "";
-          // if (item["price"] == null) item["price"] = "";
-          // if (item["securityAmount"] == null) item["securityAmount"] = "";
+    // return RefreshIndicator(
+    //   onRefresh: this.refresh,
+    //   child: Column(children: [
+    //     Column(
+    //         children: list.map((item) {
+    //       // Map itemData = item.cast<String, dynamic>();
+    //       // print(itemData);
+    //       // return Text(itemData["title"]);
+    //       //
+    //       print(item);
+    //       //
+    //       // if (item["image"] == null) item["image"] = "";
 
-          // if (item["title"] == null) item["title"] = "";
-          // if (item["tags"] == null) item["tags"] = "";
-          // if (item["_id"] == null) item["_id"] = "";
-          // if (item["donater"] == null) item["donater"] = "";
+    //       // if (item["stock"] == null) item["stock"] = "";
+    //       // if (item["type"] == null) item["type"] = "";
+    //       // if (item["period"] == null) item["period"] = "";
+    //       // if (item["price"] == null) item["price"] = "";
+    //       // if (item["securityAmount"] == null) item["securityAmount"] = "";
 
-          // if (item["latitude"] == null) {
-          //   item["latitude"] = "";
-          // } else {
-          //   item["latitude"] = item["latitude"].toString();
-          // }
-          // if (item["longitude"] == null) {
-          //   item["longitude"] = "";
-          // } else {
-          //   item["longitude"] = item["longitude"].toString();
-          // }
+    //       // if (item["title"] == null) item["title"] = "";
+    //       // if (item["tags"] == null) item["tags"] = "";
+    //       // if (item["_id"] == null) item["_id"] = "";
+    //       // if (item["donater"] == null) item["donater"] = "";
 
-          return DonationCard(item);
-        }).toList()),
-        SizedBox(
-          height: 100,
-        )
-      ]),
-    );
+    //       // if (item["latitude"] == null) {
+    //       //   item["latitude"] = "";
+    //       // } else {
+    //       //   item["latitude"] = item["latitude"].toString();
+    //       // }
+    //       // if (item["longitude"] == null) {
+    //       //   item["longitude"] = "";
+    //       // } else {
+    //       //   item["longitude"] = item["longitude"].toString();
+    //       // }
+
+    //       return DonationCard(item);
+    //     }).toList()),
+    //     SizedBox(
+    //       height: 100,
+    //     )
+    //   ]),
+    // );
   }
 }

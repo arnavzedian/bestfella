@@ -34,7 +34,7 @@ class MainBody extends StatelessWidget {
       "longitude": data["preference-longitude"],
       "city": data["preference-city"],
       "stock": data["Stock"],
-      "type": data["preference-PostType"],
+      "type": data["preference-postType"],
       "period": period,
       "securityAmount": data["Security Amount"],
       "price": data["Price"],
@@ -43,7 +43,12 @@ class MainBody extends StatelessWidget {
     };
 
     void save() {
-      load("makeDonation", "/donation", body: body, method: "get");
+      load("makeDonation", "/donation",
+          body: body, method: "POST", source: "notInitState");
+    }
+
+    if (data["loading-makeDonation"] != null) {
+      if (data["loading-makeDonation"] == true) Spinner();
     }
 
     if (data["makeDonation"] != null) {
@@ -68,10 +73,6 @@ class MainBody extends StatelessWidget {
           )
         ]),
       );
-    }
-
-    if (data["loading-makeDonation"] != null) {
-      if (data["loading-makeDonation"] == true) Spinner();
     }
 
     List<Widget> allWidgets = [

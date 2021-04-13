@@ -41,8 +41,12 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [Container(child: logo), CityButton()]);
+    return Expanded(
+        flex: 1,
+        child: Container(
+            height: 35,
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [Container(child: logo), CityButton()])));
   }
 }

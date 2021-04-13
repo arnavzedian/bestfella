@@ -3,60 +3,58 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import "../classes/ScreenArguments.dart";
+import '../StringExtension.dart';
+import "./AdditionalData.dart";
 
 class InfoPart extends StatelessWidget {
-  InfoPart([this.title = "", this.tags = "", this.type = ""]);
+  InfoPart(this.itemData, [this.title = "", this.tags = "", this.type = ""]);
   final String title;
+  final Map itemData;
   final String tags;
   final String type;
 
   @override
   Widget build(BuildContext context) {
+    String editedTitle = this.title.capitalize();
+    String editedType = this.type;
+    if (editedType == "donate") editedType = "donation";
+    editedType = editedType.capitalize();
     return Container(
         padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(
-            height: 10,
+            height: 25,
           ),
           Text(
-            title,
+            editedTitle,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
           ),
           SizedBox(
             height: 10,
           ),
-          Text(tags),
+          Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(5)),
+                child: Text(editedType, style: TextStyle(color: Colors.white)),
+                padding: EdgeInsets.all(5),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              Text(tags),
+            ],
+          ),
           SizedBox(
             height: 10,
           ),
-          Text(type),
+          AdditionalData(itemData),
+          SizedBox(
+            height: 25,
+          )
         ]));
-  }
-}
-
-class MoreInfo extends StatelessWidget {
-  MoreInfo(this.itemData);
-  final Map itemData;
-
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> widgets = [];
-
-    void doCheckingAndAdd(String name) {
-      if (itemData[name] != null) {
-        if (itemData[name] != "") {
-          var value = itemData[name];
-          widgets.add(Text("$name $value"));
-        }
-      }
-    }
-
-    doCheckingAndAdd("stock");
-    doCheckingAndAdd("securityAmount");
-    doCheckingAndAdd("price");
-    doCheckingAndAdd("period");
-
-    return Column(children: widgets);
   }
 }
 
@@ -74,10 +72,10 @@ class DonationImage extends StatelessWidget {
     return ClipRRect(
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(14), topRight: Radius.circular(14)),
-        child: Container(
-          width: double.infinity,
-          height: 200,
-          decoration: BoxDecoration(),
+        child: Expanded(
+          // width: double.infinity,
+          // height: 200,
+          flex: 1,
           child: Image.network(image, fit: BoxFit.cover),
         ));
   }
@@ -132,7 +130,8 @@ class DonationCard extends StatelessWidget {
             ),
             child: Wrap(children: [
               DonationImage(itemData['image']),
-              InfoPart(itemData['title'], itemData['tags'], itemData['type'])
+              InfoPart(itemData, itemData['title'], itemData['tags'],
+                  itemData['type']),
             ]),
           ))
     ]);

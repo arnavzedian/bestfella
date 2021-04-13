@@ -15,8 +15,12 @@ import "../widgets/RenderCards.dart";
 class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(children: [HomeHeader(), RenderCards("feeds")]));
+    return Stack(children: [
+      Container(
+          padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+          child: RenderCards("feeds")),
+      Positioned(left: 0, top: 0, child: HomeHeader())
+    ]);
   }
 }
 

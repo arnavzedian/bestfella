@@ -54,7 +54,7 @@ class ChangePostType extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             width: 2,
-            color: Colors.black,
+            color: Colors.white,
             style: BorderStyle.solid,
           )),
       child: Row(children: [
