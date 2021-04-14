@@ -5,6 +5,8 @@ import '../widgets/BottomBar.dart';
 import '../controllers/Global.dart' as globals;
 import '../widgets/Spinner.dart';
 import '../widgets/renderLocation.dart';
+import '../widgets/GetDonaterName.dart';
+import '../widgets/RenderTypeAndTags.dart';
 import '../widgets/AdditionalData.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -65,6 +67,7 @@ class DonationInfo extends StatelessWidget {
     final String image = data["item-image"] == null ? "" : data["item-image"];
     final String title = data["item-title"] == null ? "" : data["item-title"];
     final String tags = data["item-tags"] == null ? "" : data["item-tags"];
+    final String type = data["item-type"] == null ? "" : data["item-type"];
 
     final String loaderName = "requestPhoneNumber";
     if (data["loading-$loaderName"] != null) {
@@ -74,6 +77,9 @@ class DonationInfo extends StatelessWidget {
     }
     return Column(
       children: [
+        SizedBox(
+          height: 25,
+        ),
         Container(
             width: double.infinity,
             child: Row(
@@ -100,7 +106,7 @@ class DonationInfo extends StatelessWidget {
                             fontSize: 25.0,
                             fontWeight: FontWeight.normal)),
                     SizedBox(height: 5),
-                    Text(tags),
+                    RenderTypeAndTags(type, tags),
                   ],
                 ),
               ],
@@ -124,7 +130,7 @@ class MainBody extends StatelessWidget {
     }
 
     void callback2(bool data) {
-      globals.showDialog?.call("Success", "This donation has been deleted");
+      globals.showDialog?.call("Success", "This post has been deleted");
     }
 
     void requestPhoneNumber() {
@@ -157,6 +163,9 @@ class MainBody extends StatelessWidget {
       }
     }
 
+    print(data["userProfile"]);
+    print(data["item-donater"]);
+
     void openMap() async {
       String _url = 'https://maps.google.com/?q=$lat,$long';
       print(_url);
@@ -175,18 +184,23 @@ class MainBody extends StatelessWidget {
     return Stack(children: [
       Container(
           height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.all(30),
+          padding: EdgeInsets.fromLTRB(25, 0, 25, 25),
           child: SingleChildScrollView(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                SizedBox(
+                  height: 10,
+                ),
                 DonationInfo(),
                 AdditionalData(data, "item-"),
-                SizedBox(height: 25),
+                GetDonaterName(),
+                SizedBox(height: 50),
                 RenderLocation(
                     data["item-latitude"], data["item-longitude"], 150),
                 SizedBox(height: 25),
                 deleteButton,
+                SizedBox(height: 100)
               ]))),
       Positioned(bottom: 0, left: 0, child: mainButtons)
     ]);

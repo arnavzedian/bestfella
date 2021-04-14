@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import "../classes/ScreenArguments.dart";
 import '../StringExtension.dart';
 import "./AdditionalData.dart";
+import "./RenderTypeAndTags.dart";
 
 class InfoPart extends StatelessWidget {
   InfoPart(this.itemData, [this.title = "", this.tags = "", this.type = ""]);
@@ -27,26 +28,12 @@ class InfoPart extends StatelessWidget {
           ),
           Text(
             editedTitle,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           SizedBox(
             height: 10,
           ),
-          Row(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(5)),
-                child: Text(editedType, style: TextStyle(color: Colors.white)),
-                padding: EdgeInsets.all(5),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Text(tags),
-            ],
-          ),
+          RenderTypeAndTags(this.type, this.tags),
           SizedBox(
             height: 10,
           ),
@@ -93,12 +80,12 @@ class DonationCard extends StatelessWidget {
       updateWithoutRefresh("item-title", itemData['title']);
       updateWithoutRefresh("item-tags", itemData['tags']);
       updateWithoutRefresh("item-id", itemData['_id']);
-
+      updateWithoutRefresh("item-donater", itemData['donater']);
       updateWithoutRefresh("item-stock", itemData['stock']);
       updateWithoutRefresh("item-type", itemData['type']);
       updateWithoutRefresh("item-price", itemData['price']);
       updateWithoutRefresh("item-period", itemData['period']);
-      updateWithoutRefresh("item-securityAmount", itemData['securityAmount']);
+      updateWithoutRefresh("item-security", itemData['security']);
 
       updateWithoutRefresh("item-latitude", itemData['latitude'].toString());
       updateWithoutRefresh("item-longitude", itemData['longitude'].toString());

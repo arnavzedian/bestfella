@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../widgets/TakeTextInput.dart';
 import "../widgets/SaveButton.dart";
 import "../widgets/Spinner.dart";
+import "../widgets/CustomPadding.dart";
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -40,10 +41,7 @@ class _SavePhoneNumberState extends State<SavePhoneNumber> {
       if (data["loading-savePhoneNumber"] == true) Spinner();
     }
 
-    var container = Container(
-        height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
-        child: MainBody());
+    var container = CustomPadding(MainBody());
 
     return Scaffold(
         appBar: AppBar(

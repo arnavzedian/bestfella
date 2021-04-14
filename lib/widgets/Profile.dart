@@ -60,6 +60,9 @@ class _ProfileState extends State<Profile> {
 
     return Column(
       children: [
+        SizedBox(
+          height: 25,
+        ),
         Container(
             width: double.infinity,
             child: Row(

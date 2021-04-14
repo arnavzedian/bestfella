@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import "../widgets/BottomBar.dart";
 import "../widgets/HomeHeader.dart";
 import "../widgets/RenderCards.dart";
-
+import "../widgets/CustomPadding.dart";
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -31,10 +31,7 @@ class Home extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
             child: Stack(children: [
-      Container(
-          padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
-          height: MediaQuery.of(context).size.height,
-          child: MainBody()),
+      CustomPadding(MainBody()),
       Positioned(left: 0, top: 0, child: HomeHeader()),
       Positioned(bottom: 35, right: 25, child: BottomBar()),
     ])));

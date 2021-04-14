@@ -5,7 +5,7 @@ import '../widgets/TakeTextInput.dart';
 import "../widgets/RenderPlaces.dart";
 import '../controllers/Global.dart' as globals;
 import 'package:geolocator/geolocator.dart';
-
+import "../widgets/CustomPadding.dart";
 // final mapToken = globals.env["mapboxToken"];
 
 // class TodoItem {
@@ -85,9 +85,6 @@ class SaveCityName extends StatelessWidget {
               style: TextStyle(color: Colors.black87),
             ),
             backgroundColor: Colors.grey[200]),
-        body: SafeArea(
-            child: Container(
-                padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
-                child: MainBody())));
+        body: SafeArea(child: CustomPadding(MainBody())));
   }
 }

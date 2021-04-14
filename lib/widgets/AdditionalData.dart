@@ -15,8 +15,8 @@ class AdditionalData extends StatelessWidget {
       if (itemData[name] != null) {
         if (itemData[name] != "") {
           String fieldName = name;
-          if (fieldName == "securityAmount") {
-            fieldName = "Security Amount";
+          if (fieldName == "security") {
+            fieldName = "security";
           }
           fieldName = fieldName.replaceAll(prefix, "");
           fieldName = fieldName.capitalize().trim();
@@ -32,7 +32,7 @@ class AdditionalData extends StatelessWidget {
 
     // doCheckingAndAdd("type");
     doCheckingAndAdd(prefix + "stock");
-    doCheckingAndAdd(prefix + "securityAmount");
+    doCheckingAndAdd(prefix + "security");
     doCheckingAndAdd(prefix + "price");
 
     doCheckingAndAdd(prefix + "period");

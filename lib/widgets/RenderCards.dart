@@ -53,6 +53,7 @@ class _RenderCardsState extends State<RenderCards> {
     if (list.length == 0)
       return Column(
         children: [
+          widget.headerWidget,
           SizedBox(
             height: 50,
           ),
@@ -75,8 +76,8 @@ class _RenderCardsState extends State<RenderCards> {
             //
             itemCount: list.length + 1,
             crossAxisCount: 2,
-            crossAxisSpacing: 4,
-            mainAxisSpacing: 4,
+            crossAxisSpacing: 10,
+            mainAxisSpacing: 10,
             staggeredTileBuilder: (int index) {
               if (index == 0) return StaggeredTile.fit(2);
               return new StaggeredTile.fit(1);

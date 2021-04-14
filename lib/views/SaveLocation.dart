@@ -7,7 +7,7 @@ import "../widgets/RenderLocation.dart";
 import "../widgets/Spinner.dart";
 import 'package:geolocator/geolocator.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import "../widgets/CustomPadding.dart";
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -15,12 +15,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 //   }
 // }
 
-class MainBody extends StatefulWidget {
+class SaveLocation extends StatefulWidget {
   @override
-  _MainBodyState createState() => _MainBodyState();
+  _SaveLocationState createState() => _SaveLocationState();
 }
 
-class _MainBodyState extends State<MainBody> {
+class _SaveLocationState extends State<SaveLocation> {
   void getCurrentLocation(Function setLocation) async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
@@ -40,41 +40,34 @@ class _MainBodyState extends State<MainBody> {
   @override
   Widget build(BuildContext context) {
     Map data = context.watch<CentralState>().data;
-
+    Function saveLocalStorage = context.read<CentralState>().saveLocalStorage;
     final String latitude = data["questioned-latitude"];
     final String longitude = data["questioned-longitude"];
-    if (data["questioned-latitude"] == null) return Spinner();
-    return RenderLocation(latitude, longitude);
-  }
-}
+    Widget mainBody = Spinner();
+    if (data["questioned-latitude"] != null)
+      mainBody = RenderLocation(latitude, longitude);
 
-class SaveLocation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    Map data = context.watch<CentralState>().data;
-    Function saveLocalStorage = context.read<CentralState>().saveLocalStorage;
-
-    var container = Container(
+    Widget container = Container(
         // height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
-        child: MainBody());
+        child: mainBody);
 
     Widget theButton = SaveButton(() {
-      if (data["questioned-latitude"] == null) return null;
-      final String latitude = data["questioned-latitude"];
-      final String longitude = data["questioned-longitude"];
-      saveLocalStorage('preference-longitude', longitude);
-      saveLocalStorage('preference-latitude', latitude);
+      if (data["questioned-latitude"] != null) {
+        final String latitude = data["questioned-latitude"];
+        final String longitude = data["questioned-longitude"];
+        saveLocalStorage('preference-longitude', longitude);
+        saveLocalStorage('preference-latitude', latitude);
 
-      Fluttertoast.showToast(
-          msg: "Your location is saved",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-      //  Navigator.pushNamed(context, '/home');
+        Fluttertoast.showToast(
+            msg: "Your location is saved",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
     });
 
     return Scaffold(

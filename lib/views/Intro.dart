@@ -3,6 +3,7 @@ import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../controllers/Auth.dart';
+import "../widgets/CustomPadding.dart";
 
 final String assetName = 'assets/logo.svg';
 final Widget logo = SvgPicture.asset(assetName, semanticsLabel: 'Logo ');
@@ -53,56 +54,67 @@ class LoginWithGoogle extends StatelessWidget {
     }
 
     return GestureDetector(
-        onTap: attemptSignIn,
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(20.0),
-                decoration: new BoxDecoration(
-                  color: Colors.grey[50],
-                  border: new Border.all(color: Colors.black, width: 2.0),
-                  borderRadius: new BorderRadius.circular(200.0),
-                ),
-                child:
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  google,
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Login with google",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  )
-                ]))));
+      onTap: attemptSignIn,
+      child: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.fromLTRB(0, 34, 0, 34),
+          decoration: new BoxDecoration(
+            color: Colors.black,
+            border: new Border.all(color: Colors.black, width: 2.0),
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+          ),
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            google,
+            SizedBox(
+              width: 15,
+            ),
+            Text(
+              "Login with google",
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            )
+          ])),
+    );
   }
 }
 
 class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      SingleChildScrollView(
-          child: Column(children: [
-        SizedBox(
-          height: 50.0,
-        ),
-        logo,
-        SizedBox(
-          height: 30.0,
-        ),
-        HeroText(1),
-        HeroText(0.8),
-        HeroText(0.5),
-        SizedBox(
-          height: 10.0,
-        ),
-        SizedBox(
-          height: 300.0,
-        ),
-      ])),
-      Positioned(child: LoginWithGoogle())
-    ]);
+    return Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.height,
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+          SizedBox(
+            height: 50.0,
+          ),
+          logo,
+          SizedBox(
+            height: 20.0,
+          ),
+          Text(
+            "Bestfella",
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                fontStyle: FontStyle.italic),
+          ),
+          SizedBox(
+            height: 100.0,
+          ),
+          HeroText(1),
+          HeroText(0.8),
+          HeroText(0.5),
+          SizedBox(
+            height: 10.0,
+          ),
+          SizedBox(
+            height: 300.0,
+          ),
+        ]));
   }
 }
 
@@ -111,8 +123,11 @@ class Intro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: Container(
-                padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
-                child: MainBody())));
+            child: Stack(
+      children: [
+        CustomPadding(MainBody()),
+        Positioned(left: 0, bottom: 0, child: LoginWithGoogle())
+      ],
+    )));
   }
 }

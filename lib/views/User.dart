@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../widgets/BottomBar.dart';
 import '../widgets/Profile.dart';
 import '../widgets/RenderCards.dart';
-
+import "../widgets/CustomPadding.dart";
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -46,10 +46,8 @@ class User extends StatelessWidget {
             ),
             backgroundColor: Colors.grey[200]),
         body: SafeArea(
-            child: Container(
-          padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
-          height: MediaQuery.of(context).size.height,
-          child: MainBody(),
+            child: CustomPadding(
+          MainBody(),
         )));
   }
 }

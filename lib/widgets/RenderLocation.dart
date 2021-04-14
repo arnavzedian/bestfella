@@ -30,7 +30,7 @@ class TheImage extends StatelessWidget {
     final mapToken = globals.env["mapboxToken"];
 
     final String image =
-        "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/$long,$lat,9.67,0.00,0.00/1000x600@2x?access_token=$mapToken";
+        "https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/$long,$lat,13,0.00,0.00/1000x600@2x?access_token=$mapToken";
 
     return Container(
       width: double.infinity,
