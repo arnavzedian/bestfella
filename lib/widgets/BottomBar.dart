@@ -65,6 +65,7 @@ class BottomBar extends StatelessWidget {
     }
 
     void gotoHome() {
+      
       Navigator.pushNamed(context, '/home');
     }
 

@@ -4,7 +4,7 @@ import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import '../controllers/Auth.dart';
 import 'SimpleButton.dart';
-import './Spinner.dart';
+import 'Spinner.dart';
 
 class Profile extends StatefulWidget {
   Profile();
