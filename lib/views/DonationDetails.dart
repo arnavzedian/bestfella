@@ -1,3 +1,4 @@
+import 'package:bestfella/widgets/Loading.dart';
 import "package:flutter/material.dart";
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
@@ -129,10 +130,6 @@ class MainBody extends StatelessWidget {
       globals.showDialog?.call("Number", number);
     }
 
-    void callback2(bool data) {
-      globals.showDialog?.call("Success", "This post has been deleted");
-    }
-
     void requestPhoneNumber() {
       Map<String, dynamic> body = {"donationID": id};
       load(
@@ -146,8 +143,20 @@ class MainBody extends StatelessWidget {
 
     void deletePost() {
       Map<String, dynamic> body = {"donationID": id};
-      load("delete", "/delete-donation",
-          body: body, method: "POST", callback: callback2);
+      load("deletePost", "/delete-donation",
+          body: body, method: "POST", source: "notInitState");
+    }
+
+    if (data["loading-deletePost"] != null) {
+      if (data["loading-deletePost"] == true) {
+        return Loading();
+      }
+    }
+
+    if (data["deletePost"] != null) {
+      return Container(
+          padding: EdgeInsets.all(5),
+          child: Center(child: Text("Post has been deleted")));
     }
 
     String lat = data["item-latitude"];

@@ -41,11 +41,13 @@ class _SaveLocationState extends State<SaveLocation> {
   Widget build(BuildContext context) {
     Map data = context.watch<CentralState>().data;
     Function saveLocalStorage = context.read<CentralState>().saveLocalStorage;
-    final String latitude = data["questioned-latitude"];
-    final String longitude = data["questioned-longitude"];
+
     Widget mainBody = Spinner();
-    if (data["questioned-latitude"] != null)
+    if (data["questioned-latitude"] != null) {
+      final String latitude = data["questioned-latitude"];
+      final String longitude = data["questioned-longitude"];
       mainBody = RenderLocation(latitude, longitude);
+    }
 
     Widget container = Container(
         // height: MediaQuery.of(context).size.height,

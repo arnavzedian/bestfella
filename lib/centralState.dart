@@ -78,8 +78,9 @@ class CentralState with ChangeNotifier {
   }
 
   void uploadFile(String path) async {
-    String serverURL = globals.server;
-    var postUri = Uri.http(serverURL, "/api/v1/uploads");
+    String? serverURL = globals.env["server"];
+    var postUri =
+        Uri.http(serverURL == null ? "" : serverURL, "/api/v1/uploads");
 
     var request = new http.MultipartRequest("POST", postUri);
 
@@ -136,7 +137,9 @@ class CentralState with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(field, value);
     config[field] = value;
-
+    if (field == "cookie" && config[field] != null) {
+      this.load("userProfile", "/profile");
+    }
     render();
   }
 

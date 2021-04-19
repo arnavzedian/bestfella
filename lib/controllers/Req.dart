@@ -7,7 +7,7 @@ dynamic fetch(String path,
     [Map<String, dynamic> payload = const {},
     String method = "GET",
     absolute]) async {
-  String baseUrl = globals.server;
+  String? baseUrl = globals.env["server"];
   print(payload);
   print("requesting... $method $path");
   String? cookie = await readCookie();
@@ -15,7 +15,7 @@ dynamic fetch(String path,
 
   if (method == "GET") query = payload;
 
-  Uri url = Uri.http(baseUrl, "/api/v1$path", query);
+  Uri url = Uri.http(baseUrl == null ? "" : baseUrl, "/api/v1$path", query);
 
   if (absolute == true) {
     url = Uri.parse(path);

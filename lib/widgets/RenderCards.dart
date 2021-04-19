@@ -42,7 +42,16 @@ class _RenderCardsState extends State<RenderCards> {
     final Map data = context.watch<CentralState>().data;
 
     if (data["loading-$donationType"] != null) {
-      if (data["loading-$donationType"] == true) return Spinner();
+      if (data["loading-$donationType"] == true)
+        return Column(
+          children: [
+            widget.headerWidget,
+            SizedBox(
+              height: 200,
+            ),
+            Spinner(),
+          ],
+        );
     }
 
     if (data["$donationType"] == null) return Text("data not loaded");
@@ -50,16 +59,20 @@ class _RenderCardsState extends State<RenderCards> {
     final List list = data["$donationType"];
 
     String city = data['preference-city'];
-    if (list.length == 0)
-      return Column(
-        children: [
-          widget.headerWidget,
-          SizedBox(
-            height: 50,
-          ),
-          Text("Be the first donater in $city"),
-        ],
-      );
+
+    String zeroPostMessage = "Be the first to Donate/Rent/Sell in $city";
+
+    if (widget.type != "feeds") zeroPostMessage = "No post made yet";
+
+    Widget nothingToShow = Column(
+      children: [
+        widget.headerWidget,
+        SizedBox(
+          height: 50,
+        ),
+        Text(zeroPostMessage),
+      ],
+    );
 
     const List<StaggeredTile> _staggeredTiles = <StaggeredTile>[];
     const List<Widget> tiles = [];
@@ -83,6 +96,7 @@ class _RenderCardsState extends State<RenderCards> {
               return new StaggeredTile.fit(1);
             },
             itemBuilder: (BuildContext context, int index) {
+              if (list.length == 0) return nothingToShow;
               if (index == 0) return widget.headerWidget;
               return DonationCard(list[index - 1]);
             }));

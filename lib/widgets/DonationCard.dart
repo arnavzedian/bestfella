@@ -86,7 +86,7 @@ class DonationCard extends StatelessWidget {
       updateWithoutRefresh("item-price", itemData['price']);
       updateWithoutRefresh("item-period", itemData['period']);
       updateWithoutRefresh("item-security", itemData['security']);
-
+      updateWithoutRefresh("deletePost", null);
       updateWithoutRefresh("item-latitude", itemData['latitude'].toString());
       updateWithoutRefresh("item-longitude", itemData['longitude'].toString());
 

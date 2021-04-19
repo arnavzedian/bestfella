@@ -84,37 +84,31 @@ class LoginWithGoogle extends StatelessWidget {
 class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.height,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          SizedBox(
-            height: 50.0,
-          ),
-          logo,
-          SizedBox(
-            height: 20.0,
-          ),
-          Text(
-            "Bestfella",
-            style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic),
-          ),
-          SizedBox(
-            height: 100.0,
-          ),
-          HeroText(1),
-          HeroText(0.8),
-          HeroText(0.5),
-          SizedBox(
-            height: 10.0,
-          ),
-          SizedBox(
-            height: 300.0,
-          ),
-        ]));
+    return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      SizedBox(
+        height: 50.0,
+      ),
+      logo,
+      SizedBox(
+        height: 20.0,
+      ),
+      Text(
+        "Bestfella",
+        style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic),
+      ),
+      SizedBox(
+        height: 100.0,
+      ),
+      HeroText(1),
+      HeroText(0.6),
+      HeroText(0.4),
+      SizedBox(
+        height: 10.0,
+      ),
+    ]);
   }
 }
 

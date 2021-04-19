@@ -38,7 +38,7 @@ class _SavePhoneNumberState extends State<SavePhoneNumber> {
     Map data = context.watch<CentralState>().data;
 
     if (data["loading-savePhoneNumber"] != null) {
-      if (data["loading-savePhoneNumber"] == true) Spinner();
+      if (data["loading-savePhoneNumber"] == true) return Spinner();
     }
 
     var container = CustomPadding(MainBody());
@@ -63,7 +63,7 @@ class _SavePhoneNumberState extends State<SavePhoneNumber> {
                 "phoneNumber": data["Phone Number"]
               };
 
-              void callback() {
+              void callback(bool success) {
                 update("phoneNumber", data["Phone Number"]);
               }
 

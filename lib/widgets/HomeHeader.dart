@@ -54,7 +54,7 @@ class HomeHeader extends StatelessWidget {
                   SizedBox(width: 10),
                   Text("Bestfella",
                       style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           fontStyle: FontStyle.italic,
                           fontWeight: FontWeight.bold))
                 ],
