@@ -71,9 +71,9 @@ class _ProfileState extends State<Profile> {
                 ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Container(
-                      height: 130,
+                      height: 110,
                       color: Colors.grey[350],
-                      width: 130,
+                      width: 110,
                       child: Image.network(
                         picture,
                         fit: BoxFit.cover,
@@ -86,10 +86,10 @@ class _ProfileState extends State<Profile> {
                     Text(name,
                         style: TextStyle(
                             color: Colors.black87,
-                            fontSize: 25.0,
+                            fontSize: 15.0,
                             fontWeight: FontWeight.normal)),
                     SizedBox(height: 5),
-                    SimpleButton("Edit Phone number", gotoNumberEdit),
+                    SimpleButton("Edit Phone no.", gotoNumberEdit),
                     Row(children: [
                       SimpleButton("Edit GPS", gotoGPSedit),
                       SizedBox(width: 10),

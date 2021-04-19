@@ -5,6 +5,7 @@ import '../widgets/TakeTextInput.dart';
 import "../widgets/SaveButton.dart";
 import "../widgets/Spinner.dart";
 import "../widgets/CustomPadding.dart";
+import '../controllers/Global.dart' as globals;
 // class TodoItem {
 //   String item;
 //   TodoItem(String item) {
@@ -12,16 +13,9 @@ import "../widgets/CustomPadding.dart";
 //   }
 // }
 
-class MainBody extends StatefulWidget {
-  @override
-  _MainBodyState createState() => _MainBodyState();
-}
-
-class _MainBodyState extends State<MainBody> {
-  @override
+class MainBody extends StatelessWidget {
   Widget build(BuildContext context) {
-    return Expanded(
-        flex: 1, child: TakeTextInput("Phone Number", takeNumber: true));
+    return TakeTextInput("Phone Number", takeNumber: true);
   }
 }
 
@@ -59,6 +53,10 @@ class _SavePhoneNumberState extends State<SavePhoneNumber> {
           container,
           SaveButton(() {
             if (data["Phone Number"] != null) {
+              String number = data["Phone Number"].toString();
+              if (number.length < 10)
+                return globals.showDialog
+                    ?.call("Oops", "Number should be atleast 10 digit long");
               final Map<String, dynamic> body = {
                 "phoneNumber": data["Phone Number"]
               };

@@ -16,13 +16,13 @@ class SimpleButton extends StatelessWidget {
           // height: 30.0,
           decoration: new BoxDecoration(
             color: Colors.grey[50],
-            border: new Border.all(color: Colors.black26, width: 2.0),
+            border: new Border.all(color: Colors.black54, width: 1.0),
             borderRadius: new BorderRadius.circular(10.0),
           ),
           child: new Center(
             child: new Text(
               txt,
-              style: new TextStyle(fontSize: 15.0, color: Colors.black26),
+              style: new TextStyle(fontSize: 13.0, color: Colors.black54),
             ),
           ),
         )
