@@ -28,7 +28,7 @@ class CityButton extends StatelessWidget {
           ),
           child: new Center(
             child: new Text(
-              'City: $city',
+              '$city',
               style: new TextStyle(fontSize: 15.0, color: Colors.black26),
             ),
           ),
@@ -54,9 +54,12 @@ class HomeHeader extends StatelessWidget {
                   SizedBox(width: 10),
                   Text("Bestfella",
                       style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 15,
                           fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold))
+                          fontWeight: FontWeight.bold)),
+                  Container(
+                      padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                      child: Text("beta"))
                 ],
               )),
           CityButton()
