@@ -43,7 +43,7 @@ class BottomButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: Colors.black38, width: 1.0),
+            border: Border.all(color: Colors.black38, width: 0.5),
             boxShadow: [
               BoxShadow(
                 color: Color.fromRGBO(59, 59, 59, 0.16),

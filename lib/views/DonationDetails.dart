@@ -16,6 +16,7 @@ import '../widgets/DetailPageMainButton.dart';
 import '../widgets/SimpleButton.dart';
 import '../StringExtension.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 final String assetName = 'assets/map.svg';
 final Widget mapSVG = SvgPicture.asset(assetName, semanticsLabel: 'mapSVG ');
@@ -129,8 +130,9 @@ class MainBody extends StatelessWidget {
 
     void callback(int phoneNumber) {
       String number = phoneNumber.toString();
-      Clipboard.setData(new ClipboardData(text: number.toString()));
-      globals.showDialog?.call("Number copied to clipboard", number);
+      launch("tel://$number");
+      // Clipboard.setData(new ClipboardData(text: number.toString()));
+      // globals.showDialog?.call("Number copied to clipboard", number);
       // Fluttertoast.showToast(
       //     msg: "Number copied to clipboard",
       //     toastLength: Toast.LENGTH_SHORT,
