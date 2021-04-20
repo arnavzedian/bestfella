@@ -42,7 +42,8 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.fromLTRB(25, 25, 25, 0),
+        color: Colors.white,
+        padding: EdgeInsets.fromLTRB(25, 25, 25, 15),
         width: MediaQuery.of(context).size.width,
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

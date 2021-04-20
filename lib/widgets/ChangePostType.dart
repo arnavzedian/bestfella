@@ -50,13 +50,6 @@ class ChangePostType extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            width: 2,
-            color: Colors.white,
-            style: BorderStyle.solid,
-          )),
       child: Row(children: [
         TypeButton(changeCurrentPostType, currentType, "Rent"),
         TypeButton(changeCurrentPostType, currentType, "Donate"),

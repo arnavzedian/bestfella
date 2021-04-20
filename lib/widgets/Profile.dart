@@ -48,7 +48,7 @@ class _ProfileState extends State<Profile> {
 
     if (data["loading-userProfile"] != null) {
       if (data["loading-userProfile"] == true) {
-        return Spinner();
+        return Container(margin: EdgeInsets.all(50), child: Spinner());
       }
     }
 

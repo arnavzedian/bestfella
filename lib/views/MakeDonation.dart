@@ -145,9 +145,17 @@ class _MakeDonationState extends State<MakeDonation> {
       postType = data["preference-postType"];
     }
 
+    void saved(_) {
+      Map<String, dynamic> body = {
+        "basis": "city",
+        "value": data["preference-city"]
+      };
+      load.call("donations-city", "/donations", body: body, source: "notInit");
+    }
+
     void save() {
       load("makeDonation", "/donation",
-          body: body, method: "POST", source: "notInitState");
+          body: body, method: "POST", source: "notInitState", callback: saved);
     }
 
     bool showSaveButton = false;
@@ -181,7 +189,7 @@ class _MakeDonationState extends State<MakeDonation> {
             iconTheme: IconThemeData(color: Colors.black87),
             shadowColor: Colors.grey[50],
             title: Text(
-              'Make a donation',
+              'Make a post',
               style: TextStyle(color: Colors.black87),
             ),
             backgroundColor: Colors.grey[200]),

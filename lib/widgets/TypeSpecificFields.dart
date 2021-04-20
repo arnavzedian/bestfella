@@ -24,7 +24,7 @@ class TypeSpecificFields extends StatelessWidget {
 
     if (currentType == "Rent") {
       inputWidgets.add(TakeTextInput(
-          "security (to be retuned at the end of rent)",
+          "security (to be returned at the end of rent)",
           label: "security",
           takeNumber: true));
       inputWidgets.add(DropDownList(
