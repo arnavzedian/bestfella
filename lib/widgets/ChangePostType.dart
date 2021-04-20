@@ -53,8 +53,7 @@ class ChangePostType extends StatelessWidget {
       child: Row(children: [
         TypeButton(changeCurrentPostType, currentType, "Rent"),
         TypeButton(changeCurrentPostType, currentType, "Donate"),
-        TypeButton(changeCurrentPostType, currentType, "Sell"),
-        TypeButton(changeCurrentPostType, currentType, "Used")
+        TypeButton(changeCurrentPostType, currentType, "Sell")
       ]),
     );
   }

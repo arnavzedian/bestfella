@@ -12,6 +12,7 @@ class CustomPadding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        color: Colors.grey.shade100,
         padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,

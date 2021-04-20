@@ -42,7 +42,7 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
+        color: Colors.grey.shade100,
         padding: EdgeInsets.fromLTRB(25, 25, 25, 15),
         width: MediaQuery.of(context).size.width,
         child:
@@ -60,7 +60,7 @@ class HomeHeader extends StatelessWidget {
                           fontWeight: FontWeight.bold)),
                   Container(
                       padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                      child: Text("beta"))
+                      child: Text("beta v1"))
                 ],
               )),
           CityButton()

@@ -106,7 +106,7 @@ class DonationCard extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               border: Border.all(
-                width: 2,
+                width: 1,
                 color: Colors.black,
                 style: BorderStyle.solid,
               ),

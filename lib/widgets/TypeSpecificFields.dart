@@ -13,6 +13,7 @@ class TypeSpecificFields extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map data = context.watch<CentralState>().data;
+    Function update = context.watch<CentralState>().update;
 
     String currentType = "Rent";
 
@@ -21,6 +22,19 @@ class TypeSpecificFields extends StatelessWidget {
     }
 
     List<Widget> inputWidgets = [];
+
+    Widget isUsedCheckBox = ListTileTheme(
+        contentPadding: EdgeInsets.all(0),
+        child: CheckboxListTile(
+          // isThreeLine: true,
+          title: Text("Is used"),
+          value: data["isUsed-checkBox"],
+          onChanged: (newValue) {
+            update("isUsed-checkBox", newValue);
+          },
+          controlAffinity:
+              ListTileControlAffinity.leading, //  <-- leading Checkbox
+        ));
 
     if (currentType == "Rent") {
       inputWidgets.add(TakeTextInput(
@@ -32,9 +46,8 @@ class TypeSpecificFields extends StatelessWidget {
       inputWidgets.add(TakeTextInput("Price", takeNumber: true));
     } else if (currentType == "Sell") {
       inputWidgets.add(TakeTextInput("Price", takeNumber: true));
+      inputWidgets.add(isUsedCheckBox);
       // inputWidgets.add(TakeTextInput("Stock", takeNumber: true));
-    } else if (currentType == "Used") {
-      inputWidgets.add(TakeTextInput("Price", takeNumber: true));
     }
     return Container(
       width: double.infinity,

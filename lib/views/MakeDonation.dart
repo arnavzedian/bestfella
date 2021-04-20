@@ -85,6 +85,7 @@ class _MakeDonationState extends State<MakeDonation> {
     state.clearData("Tags");
     state.clearData("Stock");
     state.clearData("makeDonation");
+    state.updateWithoutRefresh("isUsed-checkBox", false);
     state.clearData("Period");
     state.clearData("Price");
     state.clearData("security");
@@ -110,6 +111,7 @@ class _MakeDonationState extends State<MakeDonation> {
       "type": data["preference-postType"],
       "period": period,
       "security": data["security"],
+      "isUsed": data["isUsed-checkBox"],
       "price": data["Price"],
       "state": data["preference-state"],
       "country": data["preference-country"],
@@ -132,7 +134,6 @@ class _MakeDonationState extends State<MakeDonation> {
       items.forEach((element) {
         if (data[element] == null) {
           shouldAllow = false;
-          //  print(data[element]);
           print("$element not defined");
         }
       });
