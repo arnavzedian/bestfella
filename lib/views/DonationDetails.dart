@@ -2,6 +2,7 @@ import 'package:bestfella/widgets/Loading.dart';
 import "package:flutter/material.dart";
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 import '../widgets/BottomBar.dart';
 import '../controllers/Global.dart' as globals;
 import '../widgets/Spinner.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../widgets/DetailPageMainButton.dart';
 import '../widgets/SimpleButton.dart';
 import '../StringExtension.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 final String assetName = 'assets/map.svg';
 final Widget mapSVG = SvgPicture.asset(assetName, semanticsLabel: 'mapSVG ');
@@ -127,24 +129,34 @@ class MainBody extends StatelessWidget {
 
     void callback(int phoneNumber) {
       String number = phoneNumber.toString();
-      globals.showDialog?.call("Number", number);
+      Clipboard.setData(new ClipboardData(text: number.toString()));
+      globals.showDialog?.call("Number copied to clipboard", number);
+      // Fluttertoast.showToast(
+      //     msg: "Number copied to clipboard",
+      //     toastLength: Toast.LENGTH_SHORT,
+      //     gravity: ToastGravity.CENTER,
+      //     timeInSecForIosWeb: 1,
+      //     backgroundColor: Colors.red,
+      //     textColor: Colors.white,
+      //     fontSize: 16.0);
     }
 
     void requestPhoneNumber() {
       Map<String, dynamic> body = {"donationID": id};
-      load(
-        "requestPhoneNumber",
-        "/request-phone-number",
-        body: body,
-        method: "POST",
-        callback: callback,
-      );
+      load("requestPhoneNumber", "/request-phone-number",
+          body: body, method: "POST", callback: callback, source: "notInit");
     }
 
     void deletePost() {
       Map<String, dynamic> body = {"donationID": id};
       load("deletePost", "/delete-donation",
           body: body, method: "POST", source: "notInitState");
+    }
+
+    if (data["loading-requestPhoneNumber"] != null) {
+      if (data["loading-requestPhoneNumber"] == true) {
+        return Loading();
+      }
     }
 
     if (data["loading-deletePost"] != null) {
