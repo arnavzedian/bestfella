@@ -28,7 +28,7 @@ class InfoPart extends StatelessWidget {
           ),
           Text(
             editedTitle,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
           ),
           SizedBox(
             height: 10,

@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import '../StringExtension.dart';
+// import 'package:intl/intl.dart';
 
 class AdditionalData extends StatelessWidget {
   AdditionalData(this.itemData, [this.prefix = ""]);
@@ -10,6 +11,11 @@ class AdditionalData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> widgets = [];
+
+    // String addCommas(String field, String val) {
+    //   var formatter = NumberFormat('#,##,000');
+    //   return formatter.format(val);
+    // }
 
     void doCheckingAndAdd(String name) {
       if (itemData[name] != null) {
@@ -22,7 +28,15 @@ class AdditionalData extends StatelessWidget {
           fieldName = fieldName.capitalize().trim();
           String value = itemData[name].toString();
           value = value.capitalize();
-          widgets.add(Text("$fieldName : $value"));
+          widgets.add(Wrap(
+            direction: Axis.horizontal,
+            children: [
+              Text("$fieldName: "),
+              Text(value,
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold)),
+            ],
+          ));
           widgets.add(SizedBox(
             height: 10,
           ));

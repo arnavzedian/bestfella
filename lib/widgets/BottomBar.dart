@@ -9,8 +9,8 @@ final Widget home = SvgPicture.asset(assetName, semanticsLabel: 'home ');
 final String assetName1 = 'assets/profile.svg';
 final Widget profile = SvgPicture.asset(assetName1, semanticsLabel: 'profile ');
 
-final String assetName2 = 'assets/heart.svg';
-final Widget heart = SvgPicture.asset(assetName2, semanticsLabel: 'heart ');
+final String assetName2 = 'assets/add.svg';
+final Widget add = SvgPicture.asset(assetName2, semanticsLabel: 'add ');
 
 class BottomButton extends StatelessWidget {
   BottomButton({required this.wid, required this.callback, this.txt: ""});
@@ -76,9 +76,8 @@ class BottomBar extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-        BottomButton(wid: home, callback: gotoHome),
+        BottomButton(wid: add, callback: gotoMakeDonation, txt: "Post"),
         BottomButton(wid: profile, callback: gotoProfile),
-        BottomButton(wid: heart, callback: gotoMakeDonation, txt: "Post"),
       ]),
     );
   }

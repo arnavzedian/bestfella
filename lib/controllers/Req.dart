@@ -15,7 +15,7 @@ dynamic fetch(String path,
 
   if (method == "GET") query = payload;
 
-  Uri url = Uri.http(baseUrl == null ? "" : baseUrl, "/api/v1$path", query);
+  Uri url = Uri.https(baseUrl == null ? "" : baseUrl, "/api/v1$path", query);
 
   if (absolute == true) {
     url = Uri.parse(path);

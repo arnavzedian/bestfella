@@ -76,6 +76,7 @@ flutter:
   - assets/loading.gif
   - assets/userOnMap.svg
   - assets/call.svg
+  - assets/add.svg
   - assets/launcherIcon.png
   - assets/map.svg
   - .env

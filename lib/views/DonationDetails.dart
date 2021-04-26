@@ -86,21 +86,21 @@ class DonationInfo extends StatelessWidget {
         ),
         Container(
             width: double.infinity,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Container(
-                      height: 70,
+                      height: 200,
                       color: Colors.grey[350],
-                      width: 70,
+                      width: double.infinity,
                       child: Image.network(
                         image,
                         fit: BoxFit.cover,
                       ),
                     )),
-                SizedBox(width: 20),
+                SizedBox(height: 20),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

@@ -12,22 +12,34 @@ class RenderTypeAndTags extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> allItems = [];
+
     String editedType = this.type;
     if (editedType == "donate") editedType = "donation";
     editedType = editedType.capitalize();
-    return Row(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              color: Colors.black, borderRadius: BorderRadius.circular(5)),
-          child: Text(editedType, style: TextStyle(color: Colors.white)),
-          padding: EdgeInsets.all(5),
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        Text(tags),
-      ],
-    );
+
+    allItems.add(Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+            width: 1,
+            color: Colors.black,
+            style: BorderStyle.solid,
+          ),
+          // color: Colors.black,
+          borderRadius: BorderRadius.circular(5)),
+      child: Text(editedType, style: TextStyle(color: Colors.black)),
+      padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+      margin: EdgeInsets.fromLTRB(0, 0, 5, 0),
+    ));
+
+    List<String> allTags = tags.split(" ");
+
+    for (String key in allTags) {
+      allItems.add(Container(
+          padding: EdgeInsets.fromLTRB(0, 5, 5, 5), child: Text(key)));
+    }
+
+    return Wrap(
+        direction: Axis.horizontal, runSpacing: 5.0, children: allItems);
   }
 }
