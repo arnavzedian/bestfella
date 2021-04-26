@@ -13,7 +13,7 @@ class CustomPadding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         color: Colors.grey.shade100,
-        padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+        padding: EdgeInsets.fromLTRB(15, 0, 15, 5),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: this.child);

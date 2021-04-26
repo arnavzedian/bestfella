@@ -21,7 +21,7 @@ class InfoPart extends StatelessWidget {
     if (editedType == "donate") editedType = "donation";
     editedType = editedType.capitalize();
     return Container(
-        padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+        padding: EdgeInsets.fromLTRB(15, 0, 0, 0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           SizedBox(
             height: 25,
@@ -33,11 +33,7 @@ class InfoPart extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          RenderTypeAndTags(this.type, this.tags),
-          SizedBox(
-            height: 10,
-          ),
-          AdditionalData(itemData),
+          RenderTypeAndTags(this.type, this.tags, itemData),
           SizedBox(
             height: 25,
           )
@@ -57,8 +53,7 @@ class DonationImage extends StatelessWidget {
     if (this.image.indexOf(".jpg") == -1) return Text("bad image");
 
     return ClipRRect(
-      borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(14), topRight: Radius.circular(14)),
+      borderRadius: BorderRadius.circular(15),
       child: Image.network(image, fit: BoxFit.cover),
     );
   }
@@ -103,14 +98,15 @@ class DonationCard extends StatelessWidget {
       GestureDetector(
           onTap: gotoDetailsPage,
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              border: Border.all(
-                width: 1,
-                color: Colors.black,
-                style: BorderStyle.solid,
-              ),
-            ),
+            // decoration: BoxDecoration(
+            //   color: Colors.white,
+            //   borderRadius: BorderRadius.circular(14),
+            //   border: Border.all(
+            //     width: 1,
+            //     color: Colors.grey.shade400,
+            //     style: BorderStyle.solid,
+            //   ),
+            // ),
             child: Wrap(children: [
               DonationImage(itemData['image']),
               InfoPart(itemData, itemData['title'], itemData['tags'],

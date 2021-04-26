@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import '../CentralState.dart';
 import 'package:provider/provider.dart';
 import '../StringExtension.dart';
-// import 'package:intl/intl.dart';
+import 'package:intl/intl.dart';
 
 class AdditionalData extends StatelessWidget {
   AdditionalData(this.itemData, [this.prefix = ""]);
@@ -12,10 +12,11 @@ class AdditionalData extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> widgets = [];
 
-    // String addCommas(String field, String val) {
-    //   var formatter = NumberFormat('#,##,000');
-    //   return formatter.format(val);
-    // }
+    String formatIt(String field, String val) {
+      if (field != "price" && field != "security") return val;
+      var formatter = NumberFormat('#,##,000');
+      return formatter.format(int.parse(val));
+    }
 
     void doCheckingAndAdd(String name) {
       if (itemData[name] != null) {
@@ -32,7 +33,7 @@ class AdditionalData extends StatelessWidget {
             direction: Axis.horizontal,
             children: [
               Text("$fieldName: "),
-              Text(value,
+              Text(formatIt(name, value),
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold)),
             ],
@@ -50,7 +51,10 @@ class AdditionalData extends StatelessWidget {
     doCheckingAndAdd(prefix + "price");
 
     doCheckingAndAdd(prefix + "period");
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start, children: widgets);
+    return Wrap(
+        direction: Axis.horizontal,
+        runSpacing: 10,
+        spacing: 10,
+        children: widgets);
   }
 }

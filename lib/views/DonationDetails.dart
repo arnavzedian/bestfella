@@ -64,6 +64,9 @@ class CustomButton extends StatelessWidget {
 }
 
 class DonationInfo extends StatelessWidget {
+  DonationInfo(this.data);
+  final Map data;
+
   @override
   Widget build(BuildContext context) {
     final Map data = context.watch<CentralState>().data;
@@ -110,12 +113,13 @@ class DonationInfo extends StatelessWidget {
                             fontSize: 25.0,
                             fontWeight: FontWeight.normal)),
                     SizedBox(height: 5),
-                    RenderTypeAndTags(type, tags),
+                    RenderTypeAndTags(
+                        type, tags, {"price": data["item-price"]}),
                   ],
                 ),
               ],
             )),
-        SizedBox(height: 50)
+        SizedBox(height: 25)
       ],
     );
   }
@@ -215,10 +219,11 @@ class MainBody extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                DonationInfo(),
+                DonationInfo(data),
                 AdditionalData(data, "item-"),
+                SizedBox(height: 25),
                 GetDonaterName(),
-                SizedBox(height: 50),
+                SizedBox(height: 25),
                 RenderLocation(
                     data["item-latitude"], data["item-longitude"], 150),
                 SizedBox(height: 25),

@@ -33,25 +33,13 @@ class BottomButton extends StatelessWidget {
     return InkWell(
         onTap: () => {callback()},
         child: Container(
-          margin: EdgeInsets.fromLTRB(25, 0, 0, 0),
+          margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
           padding: EdgeInsets.all(15),
           height: 55,
           width: txt == "" ? 55 : null,
           child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [wid, txt == "" ? SizedBox() : txtWidget]),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: Colors.black38, width: 0.5),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(59, 59, 59, 0.16),
-                blurRadius: 4,
-                offset: Offset(4, 8), // Shadow position
-              ),
-            ],
-          ),
         ));
   }
 }
@@ -65,20 +53,40 @@ class BottomBar extends StatelessWidget {
       Navigator.pushNamed(context, '/make-donation');
     }
 
-    void gotoHome() {
-      Navigator.pushNamed(context, '/home');
-    }
+    // void gotoHome() {
+    //   Navigator.pushNamed(context, '/home');
+    // }
 
     void gotoProfile() {
       Navigator.pushNamed(context, '/profile');
     }
 
-    return Container(
-      width: MediaQuery.of(context).size.width,
+    var container = Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(color: Colors.black38, width: 0.5),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromRGBO(59, 59, 59, 0.5),
+            blurRadius: 20,
+            offset: Offset(0, 0), // Shadow position
+          ),
+        ],
+      ),
+      padding: EdgeInsets.fromLTRB(20, 2, 20, 2),
+      // width: MediaQuery.of(context).size.width,
       child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
         BottomButton(wid: add, callback: gotoMakeDonation, txt: "Post"),
+        Container(
+          margin: EdgeInsets.fromLTRB(10, 2, 10, 2),
+          width: 1,
+          height: 25,
+          color: Colors.grey.shade700,
+        ),
         BottomButton(wid: profile, callback: gotoProfile),
       ]),
     );
+    return container;
   }
 }

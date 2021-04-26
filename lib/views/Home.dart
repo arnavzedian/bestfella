@@ -16,7 +16,7 @@ class MainBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+        padding: EdgeInsets.fromLTRB(10, 50, 10, 0),
         child: RenderCards(
             "feeds",
             SizedBox(
@@ -31,9 +31,9 @@ class Home extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
             child: Stack(children: [
-      CustomPadding(MainBody()),
+      MainBody(),
       Positioned(left: 0, top: 0, child: HomeHeader()),
-      Positioned(bottom: 35, right: 25, child: BottomBar()),
+      Positioned(bottom: 15, right: 15, child: BottomBar()),
     ])));
   }
 }
