@@ -15,8 +15,14 @@ class RenderTypeAndTags extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String formatIt(String val) {
+      Locale locale = Localizations.localeOf(context);
+      var format = NumberFormat.simpleCurrency(locale: locale.toString());
+      print("CURRENCY SYMBOL ${format.currencySymbol}"); // $
+      print("CURRENCY NAME ${format.currencyName}"); // USD
+      String symbol = format.currencySymbol;
       var formatter = NumberFormat('#,##,000');
-      return formatter.format(int.parse(val));
+      String num = formatter.format(int.parse(val));
+      return "$symbol$num";
     }
 
     String price = '';

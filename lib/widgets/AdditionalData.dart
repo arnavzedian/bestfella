@@ -12,19 +12,29 @@ class AdditionalData extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> widgets = [];
 
-    String formatIt(String field, String val) {
-      if (field != "price" && field != "security") return val;
+    String formatIt(String val) {
+      Locale locale = Localizations.localeOf(context);
+      var format = NumberFormat.simpleCurrency(locale: locale.toString());
+      print("CURRENCY SYMBOL ${format.currencySymbol}"); // $
+      print("CURRENCY NAME ${format.currencyName}"); // USD
+      String symbol = format.currencySymbol;
       var formatter = NumberFormat('#,##,000');
-      return formatter.format(int.parse(val));
+      String num = formatter.format(int.parse(val));
+      return "$symbol$num";
+    }
+
+    String runFormatIt(String field, String val) {
+      field = field.toLowerCase();
+      print(field);
+      if (field != "price" && field != "security") return val;
+      return formatIt(val);
     }
 
     void doCheckingAndAdd(String name) {
       if (itemData[name] != null) {
         if (itemData[name] != "") {
           String fieldName = name;
-          if (fieldName == "security") {
-            fieldName = "security";
-          }
+
           fieldName = fieldName.replaceAll(prefix, "");
           fieldName = fieldName.capitalize().trim();
           String value = itemData[name].toString();
@@ -33,7 +43,7 @@ class AdditionalData extends StatelessWidget {
             direction: Axis.horizontal,
             children: [
               Text("$fieldName: "),
-              Text(formatIt(name, value),
+              Text(runFormatIt(fieldName, value),
                   style: TextStyle(
                       color: Colors.black, fontWeight: FontWeight.bold)),
             ],
@@ -48,7 +58,7 @@ class AdditionalData extends StatelessWidget {
     // doCheckingAndAdd("type");
     doCheckingAndAdd(prefix + "stock");
     doCheckingAndAdd(prefix + "security");
-    doCheckingAndAdd(prefix + "price");
+    // doCheckingAndAdd(prefix + "price");
 
     doCheckingAndAdd(prefix + "period");
     return Wrap(
